@@ -118,11 +118,17 @@ def save_results(
         logger.warning("No Telegram IDs found to save")
         return
     
-    # Save as JSON
+    # Save as JSON (Python list format)
     if output_format in ['json', 'both']:
         json_path = os.path.join(output_dir, config.OUTPUT_JSON)
+        # Generate SOURCE_URLS list
+        source_urls = [f"https://t.me/s/{id_.lstrip('@')}" for id_ in unique_ids]
+        json_content = "SOURCE_URLS = [\n"
+        for url in source_urls:
+            json_content += f'    "{url}",\n'
+        json_content += "]"
         with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(unique_ids, f, indent=2, ensure_ascii=False)
+            f.write(json_content)
         logger.info(f"Saved JSON to: {json_path}")
         
         if full_data:
@@ -131,7 +137,7 @@ def save_results(
                 json.dump(full_data, f, indent=2, ensure_ascii=False)
             logger.info(f"Saved full data to: {full_json_path}")
     
-    # Save as TXT
+    # Save as TXT (simple list of @ids)
     if output_format in ['txt', 'both']:
         txt_path = os.path.join(output_dir, config.OUTPUT_TXT)
         with open(txt_path, 'w', encoding='utf-8') as f:
@@ -147,12 +153,10 @@ def main():
     links = []
     
     try:
-        # 1. Если задан отдельный URL – обрабатываем его
         if args.url:
             logger.info(f"Downloading from single URL: {args.url}")
             links = load_links_from_url(args.url)
         
-        # 2. Иначе читаем input-file (список URL)
         elif args.input_file:
             if not os.path.exists(args.input_file):
                 logger.error(f"Input file not found: {args.input_file}")
@@ -167,7 +171,6 @@ def main():
                 sys.exit(1)
             
             logger.info(f"Found {len(url_list)} URLs in input file")
-            # Скачиваем и собираем все конфиги
             links = collect_links_from_urls(url_list, logger)
         
         else:
@@ -180,16 +183,13 @@ def main():
         
         logger.info(f"Total config lines collected: {len(links)}")
         
-        # Парсим каждую конфигурационную строку
         parser = Parser()
         results = parser.parse_links(links)
         
-        # Извлекаем Telegram ID
         telegram_ids = []
         full_data = []
         
         for result in results:
-            # Из комментария
             if result.get('comment'):
                 ids = extract_telegram_ids(result['comment'])
                 if ids:
@@ -197,7 +197,6 @@ def main():
                     result['found_ids'] = ids
                     full_data.append(result)
             
-            # Из параметров (host, sni, server, domain)
             for param in ['host', 'sni', 'server', 'domain']:
                 if result.get(param):
                     ids = extract_telegram_ids(str(result[param]))
@@ -209,7 +208,6 @@ def main():
                         if result not in full_data:
                             full_data.append(result)
         
-        # Сохраняем
         save_results(
             telegram_ids=telegram_ids,
             output_dir=args.output,
