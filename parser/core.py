@@ -7,7 +7,7 @@ import logging
 from typing import List, Dict, Optional
 from urllib.parse import urlparse, parse_qs
 
-from .utils import parse_protocol
+from .utils import load_links_from_file, load_links_from_url  # добавлен импорт, если нужен, но не обязателен
 from .extractors import extract_telegram_ids
 import config
 
