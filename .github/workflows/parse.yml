@@ -2,15 +2,15 @@ name: Parse Telegram Channels
 
 on:
   schedule:
-    # Каждые 3 часа (0, 3, 6, 9, 12, 15, 18, 21 по UTC)
+    # Каждые 3 часа: 0, 3, 6, 9, 12, 15, 18, 21 по UTC
     - cron: '0 */3 * * *'
-  workflow_dispatch:  # ручной запуск
+  workflow_dispatch:  # ручной запуск через интерфейс GitHub
 
 jobs:
   parse:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # для коммита изменений
+      contents: write  # разрешаем коммитить изменения
 
     steps:
       - name: Checkout repository
@@ -26,9 +26,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run parser
+      - name: Run parser with input.txt
         run: |
-          python main.py --sources --output output
+          python main.py --input-file input.txt --output output
 
       - name: Commit and push if changes
         run: |
