@@ -2,9 +2,8 @@ name: Parse Telegram Channels
 
 on:
   schedule:
-    # Каждые 3 часа: 0, 3, 6, 9, 12, 15, 18, 21 по UTC
     - cron: '0 */3 * * *'
-  workflow_dispatch:  # ручной запуск через интерфейс GitHub
+  workflow_dispatch:
 
 jobs:
   parse:
@@ -34,7 +33,11 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add output/telegram_ids.txt output/telegram_ids.json
+          # Ensure output directory exists
+          mkdir -p output
+          # Force-add the generated files, even if they are ignored by .gitignore
+          git add -f output/telegram_ids.txt output/telegram_ids.json || true
+          # Commit only if there are changes
           git diff --staged --quiet || git commit -m "Update Telegram IDs (auto)"
           git push
         env:
