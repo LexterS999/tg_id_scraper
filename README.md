@@ -1,7 +1,3 @@
-Обновил `README.md` — теперь ссылка на веб-интерфейс кликабельная и открывается в новой вкладке.
-
----
-
 # 📡 Telegram ID Parser
 
 Парсер для извлечения Telegram ID из конфигурационных ссылок (vless://, vmess://, hysteria:// и другие).  
@@ -300,5 +296,5 @@ python main.py --url https://example.com/config.txt --output output
 
 **Где посмотреть веб-интерфейс?**  
 После первого успешного запуска Actions страница будет доступна по адресу:  
-👉 [**https://ваш-username.github.io/tg_id_scraper/**](https://LexterS999.github.io/tg_id_scraper/)  
+👉 [**https://LexterS999.github.io/tg_id_scraper/**](https://LexterS999.github.io/tg_id_scraper/)  
 *(замените `ваш-username` на имя вашего GitHub-аккаунта)*
