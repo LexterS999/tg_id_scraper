@@ -2,7 +2,6 @@
 @bored_vpn
 @confiig_hub
 @ansooyefilter
-@VPNine1
 @NetFlowTools
 @MARAMBASHI
 @meliproxyy
@@ -17,7 +16,7 @@
 @mtmvpn
 @chillguy_vpn
 @V2RAYBAZI
-@filembad
+@VPNine1
 @V2ray_confiig
 @FreeOnlineVPN
 @V2ngFast
@@ -34,7 +33,6 @@
 @icv2ray
 @hi_proxy_iran
 @v2raybaaz
-@proxy_kafee
 @v2rayngzendegimamad
 @V2dogs_n
 @Net2ray
@@ -64,15 +62,14 @@
 @V2rayng_Fast
 @MrNexTV2RAY
 @flyv2ray
-@kurdconfig
 @matinword
 @Azaranv2ray
 @Proxy_Vpney
 @V2raySaman
+@proxy_kafee
 @configprxy
 @V2ynpv
 @v2rayconfigamir
-@hollowcon
 @FreeConfigForYou
 @ai_duet
 @V2rayAlpha
@@ -88,6 +85,7 @@
 @Begoo_VPN
 @Ln2ray
 @vpng3
+@filembad
 @ghostvpn141
 @vpnbaz
 @vmess_ir
@@ -127,6 +125,7 @@
 @spotfyhits
 @Alfred_Config
 @bird_angry
+@GozargahAzad
 @iguanaVPN4
 @VolexProxy
 @EarnMoney_arz
