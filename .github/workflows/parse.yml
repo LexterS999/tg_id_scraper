@@ -1,4 +1,4 @@
-name: Parse Telegram Channels
+name: Scraping TG IDs
 
 on:
   schedule:
@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write      # для GitHub Pages
+      id-token: write
 
     steps:
       - name: Checkout repository
@@ -27,22 +29,34 @@ jobs:
 
       - name: Run parser with input.txt
         run: |
-          python main.py --input-file input.txt --output output
+          python main.py --input-file input.txt --output output --workers 15
+
+      - name: Copy web interface to docs/
+        run: |
+          mkdir -p docs
+          cp docs/index.html docs/
+          cp output/telegram_ids.txt docs/telegram_ids.txt || true
+          cp output/telegram_ids.py docs/telegram_ids.py || true
 
       - name: Commit and push if changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           mkdir -p output
-          # Добавляем оба файла: Python-модуль и TXT
-          git add -f output/telegram_ids.py output/telegram_ids.txt || true
+          git add -f output/telegram_ids.py output/telegram_ids.txt output/changes.txt docs/telegram_ids.txt docs/telegram_ids.py || true
           git diff --staged --quiet || git commit -m "Update Telegram IDs (auto)"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload artifacts (optional)
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: telegram-ids
           path: output/
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages
+          # This step assumes we have a docs/ folder with index.html
