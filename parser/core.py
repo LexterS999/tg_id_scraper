@@ -7,7 +7,7 @@ import logging
 from typing import List, Dict, Optional
 from urllib.parse import urlparse, parse_qs
 
-from .utils import load_links_from_file, load_links_from_url  # добавлен импорт, если нужен, но не обязателен
+from .utils import load_links_from_file, load_links_from_url
 from .extractors import extract_telegram_ids
 import config
 
@@ -21,9 +21,47 @@ class Parser:
     def __init__(self):
         self.supported_protocols = config.SUPPORTED_PROTOCOLS
         
+    def _parse_link_parts(self, main_part: str) -> Dict:
+        """
+        Parse the core part of a link (after protocol) into uuid, host, port, params.
+        Returns a dictionary with keys: uuid (optional), host, port (optional), params (optional).
+        """
+        result = {}
+        # Extract UUID and host part
+        if '@' in main_part:
+            uuid_part, rest = main_part.split('@', 1)
+            result['uuid'] = uuid_part
+        else:
+            rest = main_part
+        
+        # Split host:port and parameters
+        if '?' in rest:
+            host_port, params_str = rest.split('?', 1)
+            result['params'] = params_str
+            try:
+                params_dict = parse_qs(params_str)
+                for key, values in params_dict.items():
+                    if values:
+                        result[key] = values[0] if len(values) == 1 else values
+            except Exception as e:
+                logger.debug(f"Error parsing params: {e}")
+        else:
+            host_port = rest
+        
+        # Parse host and port
+        if ':' in host_port:
+            host, port = host_port.rsplit(':', 1)
+            result['host'] = host
+            if port.isdigit():
+                result['port'] = int(port)
+        else:
+            result['host'] = host_port
+        
+        return result
+
     def parse_link(self, link: str) -> Optional[Dict]:
         """
-        Parse a single subscription link and extract its components
+        Parse a single subscription link and extract its components.
         
         Args:
             link: Full subscription link (vless://...)
@@ -54,7 +92,6 @@ class Parser:
         comment = None
         main_part = content
         
-        # Look for comment after # or other delimiters
         for delimiter in config.COMMENT_DELIMITERS:
             if delimiter in content:
                 parts = content.split(delimiter, 1)
@@ -64,71 +101,28 @@ class Parser:
         
         # Parse the main part
         result = {
-            'protocol': protocol[:-3],  # Remove ://
+            'protocol': protocol[:-3],
             'raw': link,
             'comment': comment
         }
         
-        # Parse UUID@host:port?params
         try:
-            # Extract UUID and host part
-            if '@' in main_part:
-                uuid_part, rest = main_part.split('@', 1)
-                result['uuid'] = uuid_part
-                
-                # Parse host:port and parameters
-                if '?' in rest:
-                    host_port, params_str = rest.split('?', 1)
-                    result['params'] = params_str
-                    # Parse query parameters
-                    try:
-                        params_dict = parse_qs(params_str)
-                        for key, values in params_dict.items():
-                            if values:
-                                result[key] = values[0] if len(values) == 1 else values
-                    except Exception as e:
-                        logger.debug(f"Error parsing params: {e}")
-                else:
-                    host_port = rest
-                
-                # Parse host and port
-                if ':' in host_port:
-                    host, port = host_port.rsplit(':', 1)
-                    result['host'] = host
-                    if port.isdigit():
-                        result['port'] = int(port)
-                else:
-                    result['host'] = host_port
-                    
-            else:
-                # No UUID, just host:port?params
-                if '?' in main_part:
-                    host_port, params_str = main_part.split('?', 1)
-                    result['params'] = params_str
-                else:
-                    host_port = main_part
-                    
-                if ':' in host_port:
-                    host, port = host_port.rsplit(':', 1)
-                    result['host'] = host
-                    if port.isdigit():
-                        result['port'] = int(port)
-                else:
-                    result['host'] = host_port
-                    
+            parsed = self._parse_link_parts(main_part)
+            result.update(parsed)
         except Exception as e:
             logger.debug(f"Error parsing link: {e}")
             return None
         
-        # Also extract IDs from host and comment
+        # Extract IDs from comment and from all fields listed in config
         all_ids = []
         if comment:
             all_ids.extend(extract_telegram_ids(comment))
         
-        # Check other fields for IDs
-        for field in ['host', 'sni', 'server', 'domain']:
+        for field in config.URL_PARAMS_TO_CHECK:
             if field in result and result[field]:
-                all_ids.extend(extract_telegram_ids(str(result[field])))
+                ids = extract_telegram_ids(str(result[field]))
+                if ids:
+                    all_ids.extend(ids)
         
         if all_ids:
             result['found_telegram_ids'] = list(set(all_ids))
@@ -137,7 +131,7 @@ class Parser:
     
     def parse_links(self, links: List[str]) -> List[Dict]:
         """
-        Parse multiple links
+        Parse multiple links.
         
         Args:
             links: List of subscription links
@@ -157,7 +151,8 @@ class Parser:
     
     def extract_all_telegram_ids(self, links: List[str]) -> List[str]:
         """
-        Extract all Telegram IDs from a list of links
+        Extract all Telegram IDs from a list of links.
+        Uses already parsed data, no redundant extraction.
         
         Args:
             links: List of subscription links
@@ -171,10 +166,5 @@ class Parser:
         for result in results:
             if 'found_telegram_ids' in result:
                 all_ids.extend(result['found_telegram_ids'])
-                
-            # Also extract from comment field if present
-            if 'comment' in result and result['comment']:
-                ids = extract_telegram_ids(result['comment'])
-                all_ids.extend(ids)
         
         return all_ids
