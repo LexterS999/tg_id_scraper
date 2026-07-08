@@ -9,6 +9,8 @@ from typing import List, Optional
 from pathlib import Path
 
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 import config
 
@@ -34,29 +36,37 @@ def load_links_from_file(file_path: str) -> List[str]:
     return links
 
 
-def load_links_from_url(url: str, timeout: int = 30) -> List[str]:
+def load_links_from_url(url: str, timeout: int = 30, retries: int = 3) -> List[str]:
     """
-    Download a file from URL and extract config lines (one per line)
+    Download a file from URL with automatic retries.
     """
-    links = []
+    session = requests.Session()
+    retry_strategy = Retry(
+        total=retries,
+        backoff_factor=1,
+        status_forcelist=[500, 502, 503, 504],
+        allowed_methods=["GET"]
+    )
+    adapter = HTTPAdapter(max_retries=retry_strategy)
+    session.mount('http://', adapter)
+    session.mount('https://', adapter)
+
     try:
-        response = requests.get(url, timeout=timeout)
+        response = session.get(url, timeout=timeout)
         response.raise_for_status()
         
-        # Check file size
         if len(response.content) > config.MAX_DOWNLOAD_SIZE:
             raise Exception(f"File too large: {len(response.content)} bytes")
         
-        content = response.text
-        for line in content.split('\n'):
+        links = []
+        for line in response.text.split('\n'):
             line = line.strip()
             if line and not line.startswith('#'):
                 links.append(line)
+        logger.debug(f"Downloaded {len(links)} config lines from {url}")
+        return links
     except requests.RequestException as e:
         raise Exception(f"Error downloading URL {url}: {e}")
-    
-    logger.debug(f"Downloaded {len(links)} config lines from {url}")
-    return links
 
 
 def save_json(data, file_path: str, indent: int = 2):
