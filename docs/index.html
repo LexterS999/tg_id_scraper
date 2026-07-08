@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Telegram ID Parser — результаты</title>
+    <style>
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0d1117; color: #e6edf3; margin: 0; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { font-weight: 300; border-bottom: 1px solid #30363d; padding-bottom: 0.5rem; }
+        ul { list-style: none; padding: 0; }
+        li { background: #161b22; margin: 0.5rem 0; padding: 0.75rem 1rem; border-radius: 8px; display: flex; align-items: center; gap: 1rem; }
+        li a { color: #58a6ff; text-decoration: none; }
+        li a:hover { text-decoration: underline; }
+        .badge { background: #238636; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; color: white; }
+        .footer { margin-top: 2rem; font-size: 0.85rem; color: #8b949e; border-top: 1px solid #30363d; padding-top: 1rem; }
+        .loading { text-align: center; padding: 3rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>📡 Найденные Telegram-каналы</h1>
+    <div id="list" class="loading">Загрузка...</div>
+    <div class="footer">Обновлено автоматически из <code>telegram_ids.txt</code></div>
+</div>
+<script>
+    fetch('telegram_ids.txt')
+        .then(res => {
+            if (!res.ok) throw new Error('Не удалось загрузить список');
+            return res.text();
+        })
+        .then(text => {
+            const lines = text.split('\n').filter(line => line.trim().startsWith('@'));
+            const container = document.getElementById('list');
+            container.className = '';
+            if (lines.length === 0) {
+                container.innerHTML = '<p>Пока ничего не найдено.</p>';
+                return;
+            }
+            const ul = document.createElement('ul');
+            lines.forEach(id => {
+                const li = document.createElement('li');
+                const url = `https://t.me/s/${id.substring(1)}`;
+                li.innerHTML = `<span>${id}</span> <a href="${url}" target="_blank">открыть</a> <span class="badge">${id.substring(1)}</span>`;
+                ul.appendChild(li);
+            });
+            container.appendChild(ul);
+        })
+        .catch(err => {
+            document.getElementById('list').innerHTML = `<p style="color: #f85149;">Ошибка: ${err.message}</p>`;
+        });
+</script>
+</body>
+</html>
