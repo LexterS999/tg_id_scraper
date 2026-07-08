@@ -28,6 +28,6 @@ SUPPORTED_PROTOCOLS = ['vless://', 'trojan://', 'vmess://', 'ss://', 'ssr://']
 LOG_LEVEL = "INFO"
 
 # Output filenames
-OUTPUT_JSON = "telegram_ids.json"
+OUTPUT_JSON = "telegram_ids.py"
 OUTPUT_TXT = "telegram_ids.txt"
 OUTPUT_FULL_JSON = "parsed_configs.json"
