@@ -1,4 +1,5 @@
 SOURCE_URLS = [
+    "https://t.me/s/support",
     "https://t.me/s/hayabusa",
     "https://t.me/s/pleased",
     "https://t.me/s/all083",
