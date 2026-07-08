@@ -1,7 +1,7 @@
-# 📡 Telegram ID Parser
+# 📡 Telegram ID Scaper
 
 Парсер для извлечения Telegram ID из конфигурационных ссылок (vless://, vmess://, hysteria:// и другие).  
-Работает в автоматическом режиме через GitHub Actions, умеет находить ID даже в закодированных полях, отслеживать изменения и показывает результаты в веб-интерфейсе.
+Работает в автоматическом режиме через GitHub Actions, умеет находить ID даже в закодированных полях и отслеживать изменения.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
@@ -20,7 +20,6 @@
 - Очищает ID от лишнего текста (например, `@channel (канал)` → `@channel`).
 - Работает **инкрементально** — показывает, какие ID появились или исчезли.
 - Сохраняет **промежуточные результаты**, чтобы не потерять данные при сбое.
-- Отдаёт результаты в **веб-интерфейсе** (GitHub Pages).
 
 ---
 
@@ -95,23 +94,10 @@ Removed IDs:
 
 ---
 
-## 🌐 Веб-интерфейс
-
-После каждого запуска на GitHub Pages публикуется страница с результатами.  
-Перейдите по ссылке, чтобы увидеть все найденные каналы в виде удобного списка со ссылками:
-
-👉 [**Открыть веб-интерфейс**](https://LexterS999.github.io/tg_id_scraper/)  
-*(замените `ваш-username` на имя вашего GitHub-аккаунта)*
-
-Страница обновляется автоматически после каждого запуска парсера.  
-Вы можете использовать её для быстрого просмотра результатов без необходимости скачивать файлы.
-
----
-
 ## ⚙️ GitHub Actions (Автоматизация)
 
 Проект настроен для автоматического запуска каждые 3 часа.  
-Результаты коммитятся в репозиторий, а веб-интерфейс публикуется на GitHub Pages.
+Результаты коммитятся в репозиторий.
 
 ### Workflow: `.github/workflows/parse.yml`
 
@@ -128,8 +114,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout repository
@@ -149,17 +133,11 @@ jobs:
         run: |
           python main.py --input-file input.txt --output output --workers 15
 
-      - name: Copy web interface
-        run: |
-          mkdir -p docs
-          cp docs/index.html docs/
-          cp output/telegram_ids.txt docs/telegram_ids.txt || true
-
       - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f output/telegram_ids.py output/telegram_ids.txt output/changes.txt docs/telegram_ids.txt || true
+          git add -f output/telegram_ids.py output/telegram_ids.txt output/changes.txt || true
           git diff --staged --quiet || git commit -m "Update Telegram IDs (auto)"
           git push
 
@@ -168,9 +146,6 @@ jobs:
         with:
           name: telegram-ids
           path: output/
-
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
 ```
 
 ### Ручной запуск
@@ -197,8 +172,6 @@ tg_id_scraper/
 │   ├── test_extractors.py
 │   ├── test_utils.py             # Тесты для утилит
 │   └── test_integration.py       # Интеграционные тесты
-├── docs/
-│   └── index.html                # Веб-интерфейс для GitHub Pages
 ├── output/                       # Результаты (создаётся автоматически)
 │   ├── .gitkeep
 │   ├── telegram_ids.py
@@ -256,7 +229,7 @@ pytest tests/
 
 ## 🔒 .gitignore
 
-Файлы результатов (`output/*.py`, `output/*.txt`, `docs/telegram_ids.txt`) **не игнорируются**, чтобы они попадали в репозиторий.  
+Файлы результатов (`output/*.py`, `output/*.txt`) **не игнорируются**, чтобы они попадали в репозиторий.  
 Остальные временные и системные файлы — игнорируются.
 
 ---
@@ -279,7 +252,7 @@ MIT. Подробнее в файле `LICENSE`.
 ## ❓ Часто задаваемые вопросы
 
 **Что делать, если файлы не обновляются в репозитории?**  
-Проверьте, что в `.gitignore` нет строк, игнорирующих `output/*.py` или `docs/telegram_ids.txt`. Если есть — удалите их и сделайте коммит.
+Проверьте, что в `.gitignore` нет строк, игнорирующих `output/*.py` или `output/*.txt`. Если есть — удалите их и сделайте коммит.
 
 **Как изменить расписание запуска?**  
 Измените `cron` в `.github/workflows/parse.yml`:
@@ -293,8 +266,3 @@ schedule:
 ```bash
 python main.py --url https://example.com/config.txt --output output
 ```
-
-**Где посмотреть веб-интерфейс?**  
-После первого успешного запуска Actions страница будет доступна по адресу:  
-👉 [**https://LexterS999.github.io/tg_id_scraper/**](https://LexterS999.github.io/tg_id_scraper/)  
-*(замените `ваш-username` на имя вашего GitHub-аккаунта)*
