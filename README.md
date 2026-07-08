@@ -1,6 +1,11 @@
+Обновил `README.md` — теперь ссылка на веб-интерфейс кликабельная и открывается в новой вкладке.
+
+---
+
 # 📡 Telegram ID Parser
 
-Парсер для извлечения Telegram ID из конфигурационных ссылок (vless://, vmess://, и т.д.) с автоматическим обновлением через GitHub Actions.
+Парсер для извлечения Telegram ID из конфигурационных ссылок (vless://, vmess://, hysteria:// и другие).  
+Работает в автоматическом режиме через GitHub Actions, умеет находить ID даже в закодированных полях, отслеживать изменения и показывает результаты в веб-интерфейсе.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
@@ -10,17 +15,16 @@
 
 ## 🎯 Назначение
 
-Инструмент сканирует конфигурационные ссылки (vless://, vmess://, и т.д.) и извлекает упоминания Telegram-каналов в формате `@username`. Результат сохраняется в виде списка URL-адресов каналов в формате Python-списка, готового для использования в других скриптах.
+Инструмент сканирует конфигурационные ссылки (vless://, vmess://, trojan://, hysteria://, tuic:// и другие) и извлекает упоминания Telegram-каналов в формате `@username`.
 
-### Пример использования
-
-**Входные данные** (конфигурационная ссылка):
-```
-vless://03707fb7...@104.16.75.234:443?path=/&security=tls#@iguanaVPN6
-```
-
-**Извлечённый ID:** `@iguanaVPN6`  
-**Итоговый URL:** `https://t.me/s/iguanaVPN6`
+**Что умеет:**
+- Поддерживает **7 протоколов** (vless, vmess, trojan, ss, ssr, hysteria, tuic).
+- Декодирует **base64**-закодированные параметры (актуально для vmess:// и подобных).
+- Ищет ID **во всех полях** ссылки, включая `path`, `extra`, `remarks`.
+- Очищает ID от лишнего текста (например, `@channel (канал)` → `@channel`).
+- Работает **инкрементально** — показывает, какие ID появились или исчезли.
+- Сохраняет **промежуточные результаты**, чтобы не потерять данные при сбое.
+- Отдаёт результаты в **веб-интерфейсе** (GitHub Pages).
 
 ---
 
@@ -47,16 +51,22 @@ pip install -r requirements.txt
    python main.py --input-file input.txt --output output
    ```
 
+   **Дополнительные параметры:**
+   - `--workers 15` — количество параллельных загрузчиков (по умолчанию 10).
+   - `--no-incremental` — отключить инкрементальный режим (всегда перезаписывать).
+   - `-v` — подробный вывод.
+
 3. Результат появится в папке `output/`:
-   - `telegram_ids.json` — список URL-адресов каналов в формате Python
-   - `telegram_ids.txt` — простой список ID с `@`
-   - `parsed_configs.json` — полные данные парсинга
+   - `telegram_ids.py` — список URL-адресов каналов в формате Python-модуля (можно импортировать).
+   - `telegram_ids.txt` — простой список ID с `@`.
+   - `parsed_configs.json` — полные данные парсинга.
+   - `changes.txt` — отчёт о добавленных и удалённых ID (при инкрементальном режиме).
 
 ---
 
 ## 📁 Выходные данные
 
-### `telegram_ids.json`
+### `telegram_ids.py` (Python-модуль)
 ```python
 SOURCE_URLS = [
     "https://t.me/s/Leecher56",
@@ -78,11 +88,34 @@ SOURCE_URLS = [
 @FarazV2ray
 ```
 
+### `changes.txt` (пример)
+```
+Added IDs:
+  + @new_channel
+  + @another_one
+Removed IDs:
+  - @old_channel
+```
+
+---
+
+## 🌐 Веб-интерфейс
+
+После каждого запуска на GitHub Pages публикуется страница с результатами.  
+Перейдите по ссылке, чтобы увидеть все найденные каналы в виде удобного списка со ссылками:
+
+👉 [**Открыть веб-интерфейс**](https://LexterS999.github.io/tg_id_scraper/)  
+*(замените `ваш-username` на имя вашего GitHub-аккаунта)*
+
+Страница обновляется автоматически после каждого запуска парсера.  
+Вы можете использовать её для быстрого просмотра результатов без необходимости скачивать файлы.
+
 ---
 
 ## ⚙️ GitHub Actions (Автоматизация)
 
-Проект настроен для автоматического запуска каждые 3 часа через GitHub Actions.
+Проект настроен для автоматического запуска каждые 3 часа.  
+Результаты коммитятся в репозиторий, а веб-интерфейс публикуется на GitHub Pages.
 
 ### Workflow: `.github/workflows/parse.yml`
 
@@ -91,14 +124,16 @@ name: Parse Telegram Channels
 
 on:
   schedule:
-    - cron: '0 */3 * * *'   # Каждые 3 часа
-  workflow_dispatch:         # Ручной запуск
+    - cron: '0 */3 * * *'
+  workflow_dispatch:
 
 jobs:
   parse:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pages: write
+      id-token: write
 
     steps:
       - name: Checkout repository
@@ -116,24 +151,30 @@ jobs:
 
       - name: Run parser
         run: |
-          python main.py --input-file input.txt --output output
+          python main.py --input-file input.txt --output output --workers 15
 
-      - name: Commit and push if changes
+      - name: Copy web interface
+        run: |
+          mkdir -p docs
+          cp docs/index.html docs/
+          cp output/telegram_ids.txt docs/telegram_ids.txt || true
+
+      - name: Commit and push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          mkdir -p output
-          git add -f output/telegram_ids.txt output/telegram_ids.json || true
+          git add -f output/telegram_ids.py output/telegram_ids.txt output/changes.txt docs/telegram_ids.txt || true
           git diff --staged --quiet || git commit -m "Update Telegram IDs (auto)"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: telegram-ids
           path: output/
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
 ```
 
 ### Ручной запуск
@@ -145,60 +186,67 @@ jobs:
 
 ```
 tg_id_scraper/
-├── .github/
-│   └── workflows/
-│       └── parse.yml           # GitHub Actions workflow
+├── .github/workflows/parse.yml   # GitHub Actions
 ├── parser/
 │   ├── __init__.py
-│   ├── core.py                 # Основной парсер
-│   ├── extractors.py           # Извлечение Telegram ID
-│   └── utils.py                # Вспомогательные функции
+│   ├── core.py                   # Основной парсер (новые протоколы, base64, умный поиск)
+│   ├── extractors.py             # Извлечение ID
+│   ├── utils.py                  # Загрузка, кэш, промежуточное сохранение
+│   └── validators.py             # Валидация ссылок и очистка ID
 ├── examples/
-│   ├── run_example.py          # Пример использования
-│   └── sample.txt              # Пример входных данных
+│   ├── run_example.py
+│   └── sample.txt
 ├── tests/
-│   ├── test_core.py            # Тесты парсера
-│   └── test_extractors.py      # Тесты извлечения
-├── output/                     # Результаты (создаётся автоматически)
+│   ├── test_core.py
+│   ├── test_extractors.py
+│   ├── test_utils.py             # Тесты для утилит
+│   └── test_integration.py       # Интеграционные тесты
+├── docs/
+│   └── index.html                # Веб-интерфейс для GitHub Pages
+├── output/                       # Результаты (создаётся автоматически)
 │   ├── .gitkeep
-│   ├── telegram_ids.json
+│   ├── telegram_ids.py
 │   ├── telegram_ids.txt
-│   └── parsed_configs.json
+│   ├── parsed_configs.json
+│   └── changes.txt
 ├── .gitignore
-├── config.py                   # Настройки (регулярки, форматы)
-├── input.txt                   # Ссылки на конфигурационные файлы
-├── main.py                     # Точка входа
-├── README.md                   # Этот файл
-└── requirements.txt            # Зависимости
+├── config.py                     # Настройки
+├── input.txt                     # Ссылки на конфигурационные файлы
+├── main.py                       # Точка входа
+├── README.md                     # Этот файл
+└── requirements.txt              # Зависимости
 ```
 
 ---
 
 ## 🔧 Конфигурация
 
-Все настройки хранятся в `config.py`:
+Все настройки в `config.py`:
 
 ```python
-# Регулярные выражения для поиска Telegram ID
-TELEGRAM_ID_PATTERN = r'@[a-zA-Z0-9_]{5,32}'
+# Поддерживаемые протоколы (расширенный список)
+SUPPORTED_PROTOCOLS = [
+    'vless://', 'vmess://', 'trojan://', 'ss://', 'ssr://',
+    'hysteria://', 'tuic://'
+]
 
-# Параметры URL, которые проверяются на наличие ID
+# Параметры для проверки (сейчас проверяются все, но можно сузить)
 URL_PARAMS_TO_CHECK = ['host', 'sni', 'server', 'domain', 'add']
 
-# Поддерживаемые протоколы
-SUPPORTED_PROTOCOLS = ['vless://', 'trojan://', 'vmess://', 'ss://', 'ssr://']
+# Время жизни кэша (секунды)
+CACHE_TTL = 3600
 
-# Формат выходных файлов
-DEFAULT_OUTPUT_FORMAT = "both"  # 'json', 'txt', 'both'
+# Количество параллельных воркеров по умолчанию
+DEFAULT_WORKERS = 10
 ```
 
 ---
 
 ## 📦 Зависимости
 
-- `requests >= 2.28.0` — для загрузки конфигураций
+- `requests >= 2.28.0` — загрузка конфигураций
 - `urllib3 >= 1.26.0` — HTTP-клиент
-- `pytest >= 7.0.0` — для тестов
+- `pytest >= 7.0.0` — тесты
 
 ---
 
@@ -212,44 +260,45 @@ pytest tests/
 
 ## 🔒 .gitignore
 
-Файлы `output/*.json` и `output/*.txt` **не игнорируются**, чтобы результаты сохранялись в репозитории. Остальные стандартные для Python файлы игнорируются.
-
-```gitignore
-# Output files — сохраняются для CI/CD
-!output/.gitkeep
-```
+Файлы результатов (`output/*.py`, `output/*.txt`, `docs/telegram_ids.txt`) **не игнорируются**, чтобы они попадали в репозиторий.  
+Остальные временные и системные файлы — игнорируются.
 
 ---
 
 ## 📝 Лицензия
 
-Проект распространяется под лицензией **MIT**. Подробнее в файле `LICENSE`.
+MIT. Подробнее в файле `LICENSE`.
 
 ---
 
 ## 🤝 Вклад
 
-1. Форкните репозиторий
-2. Создайте ветку для изменений
-3. Внесите изменения и добавьте тесты
-4. Отправьте Pull Request
+1. Форкните репозиторий.
+2. Создайте ветку для изменений.
+3. Внесите изменения и добавьте тесты.
+4. Отправьте Pull Request.
 
 ---
 
 ## ❓ Часто задаваемые вопросы
 
-### Что делать, если файлы не обновляются в репозитории?
-Проверьте, что в `.gitignore` нет строк, игнорирующих `output/*.json` или `output/*.txt`. Если они есть — удалите их и сделайте коммит.
+**Что делать, если файлы не обновляются в репозитории?**  
+Проверьте, что в `.gitignore` нет строк, игнорирующих `output/*.py` или `docs/telegram_ids.txt`. Если есть — удалите их и сделайте коммит.
 
-### Как изменить расписание запуска?
+**Как изменить расписание запуска?**  
 Измените `cron` в `.github/workflows/parse.yml`:
 ```yaml
 schedule:
   - cron: '0 */6 * * *'   # Каждые 6 часов
 ```
 
-### Можно ли использовать одну ссылку вместо списка?
-Да, используйте флаг `--url`:
+**Можно ли использовать одну ссылку вместо списка?**  
+Да, через флаг `--url`:
 ```bash
 python main.py --url https://example.com/config.txt --output output
 ```
+
+**Где посмотреть веб-интерфейс?**  
+После первого успешного запуска Actions страница будет доступна по адресу:  
+👉 [**https://ваш-username.github.io/tg_id_scraper/**](https://LexterS999.github.io/tg_id_scraper/)  
+*(замените `ваш-username` на имя вашего GitHub-аккаунта)*
