@@ -1,4 +1,3 @@
-@support
 @hayabusa
 @pleased
 @all083
