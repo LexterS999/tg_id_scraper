@@ -9,6 +9,7 @@ import argparse
 import logging
 import json
 from typing import List, Optional
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from parser.core import Parser
 from parser.utils import load_links_from_file, load_links_from_url
@@ -78,20 +79,24 @@ Examples:
 
 def collect_links_from_urls(url_list: List[str], logger: logging.Logger) -> List[str]:
     """
-    Download each URL and extract config lines (vless://, vmess://, etc.)
+    Download each URL in parallel and extract config lines (vless://, vmess://, etc.)
     """
     all_links = []
-    for url in url_list:
-        url = url.strip()
-        if not url or url.startswith('#'):
-            continue
-        try:
-            logger.info(f"Fetching configs from: {url}")
-            links = load_links_from_url(url)
-            logger.debug(f"Got {len(links)} config lines from {url}")
-            all_links.extend(links)
-        except Exception as e:
-            logger.error(f"Failed to fetch {url}: {e}")
+    # Filter out empty lines and comments
+    urls = [u.strip() for u in url_list if u.strip() and not u.startswith('#')]
+    if not urls:
+        return all_links
+
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        future_to_url = {executor.submit(load_links_from_url, url): url for url in urls}
+        for future in as_completed(future_to_url):
+            url = future_to_url[future]
+            try:
+                links = future.result()
+                all_links.extend(links)
+                logger.debug(f"Got {len(links)} config lines from {url}")
+            except Exception as e:
+                logger.error(f"Failed to fetch {url}: {e}")
     return all_links
 
 
@@ -118,18 +123,17 @@ def save_results(
         logger.warning("No Telegram IDs found to save")
         return
     
-    # Save as JSON (Python list format)
+    # Save as Python module (list of URLs)
     if output_format in ['json', 'both']:
-        json_path = os.path.join(output_dir, config.OUTPUT_JSON)
-        # Generate SOURCE_URLS list
+        py_path = os.path.join(output_dir, config.OUTPUT_JSON)
         source_urls = [f"https://t.me/s/{id_.lstrip('@')}" for id_ in unique_ids]
-        json_content = "SOURCE_URLS = [\n"
+        py_content = "SOURCE_URLS = [\n"
         for url in source_urls:
-            json_content += f'    "{url}",\n'
-        json_content += "]"
-        with open(json_path, 'w', encoding='utf-8') as f:
-            f.write(json_content)
-        logger.info(f"Saved JSON to: {json_path}")
+            py_content += f'    "{url}",\n'
+        py_content += "]"
+        with open(py_path, 'w', encoding='utf-8') as f:
+            f.write(py_content)
+        logger.info(f"Saved Python module to: {py_path}")
         
         if full_data:
             full_json_path = os.path.join(output_dir, config.OUTPUT_FULL_JSON)
@@ -190,23 +194,10 @@ def main():
         full_data = []
         
         for result in results:
-            if result.get('comment'):
-                ids = extract_telegram_ids(result['comment'])
-                if ids:
-                    telegram_ids.extend(ids)
-                    result['found_ids'] = ids
-                    full_data.append(result)
-            
-            for param in ['host', 'sni', 'server', 'domain']:
-                if result.get(param):
-                    ids = extract_telegram_ids(str(result[param]))
-                    if ids:
-                        telegram_ids.extend(ids)
-                        if 'found_ids' not in result:
-                            result['found_ids'] = []
-                        result['found_ids'].extend(ids)
-                        if result not in full_data:
-                            full_data.append(result)
+            ids = result.get('found_telegram_ids', [])
+            if ids:
+                telegram_ids.extend(ids)
+                full_data.append(result)
         
         save_results(
             telegram_ids=telegram_ids,
