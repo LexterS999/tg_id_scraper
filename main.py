@@ -8,17 +8,22 @@ import sys
 import argparse
 import logging
 import json
-from typing import List, Optional
+from typing import List, Optional, Set
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 
 from parser.core import Parser
-from parser.utils import load_links_from_file, load_links_from_url
+from parser.utils import (
+    load_links_from_file,
+    load_links_from_url,
+    load_previous_ids,
+    save_intermediate_results
+)
 from parser.extractors import extract_telegram_ids
 import config
 
 
 def setup_logging(verbose: bool = False):
-    """Configure logging based on verbosity level"""
     level = logging.DEBUG if verbose else logging.INFO
     logging.basicConfig(
         level=level,
@@ -29,7 +34,6 @@ def setup_logging(verbose: bool = False):
 
 
 def parse_arguments():
-    """Parse command line arguments"""
     parser = argparse.ArgumentParser(
         description="Extract Telegram IDs from subscription links",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -46,20 +50,17 @@ Examples:
         type=str,
         help="Path to text file containing list of URLs (one per line) to fetch configs from"
     )
-    
     parser.add_argument(
         '-u', '--url',
         type=str,
         help="Single URL to download and parse (overrides --input-file)"
     )
-    
     parser.add_argument(
         '-o', '--output',
         type=str,
         default=config.DEFAULT_OUTPUT_DIR,
         help=f"Output directory (default: {config.DEFAULT_OUTPUT_DIR})"
     )
-    
     parser.add_argument(
         '-f', '--format',
         type=str,
@@ -67,27 +68,32 @@ Examples:
         default=config.DEFAULT_OUTPUT_FORMAT,
         help=f"Output format: json, txt, or both (default: {config.DEFAULT_OUTPUT_FORMAT})"
     )
-    
     parser.add_argument(
         '-v', '--verbose',
         action='store_true',
         help="Enable verbose output"
     )
-    
+    parser.add_argument(
+        '--workers',
+        type=int,
+        default=config.DEFAULT_WORKERS,
+        help=f"Number of parallel workers for downloading (default: {config.DEFAULT_WORKERS})"
+    )
+    parser.add_argument(
+        '--no-incremental',
+        action='store_true',
+        help="Disable incremental update (always overwrite output)"
+    )
     return parser.parse_args()
 
 
-def collect_links_from_urls(url_list: List[str], logger: logging.Logger) -> List[str]:
-    """
-    Download each URL in parallel and extract config lines (vless://, vmess://, etc.)
-    """
+def collect_links_from_urls(url_list: List[str], logger: logging.Logger, max_workers: int = 10) -> List[str]:
     all_links = []
-    # Filter out empty lines and comments
     urls = [u.strip() for u in url_list if u.strip() and not u.startswith('#')]
     if not urls:
         return all_links
 
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_url = {executor.submit(load_links_from_url, url): url for url in urls}
         for future in as_completed(future_to_url):
             url = future_to_url[future]
@@ -105,10 +111,11 @@ def save_results(
     output_dir: str,
     output_format: str,
     full_data: Optional[List[dict]] = None,
-    logger: logging.Logger = None
+    logger: logging.Logger = None,
+    incremental: bool = True,
+    previous_ids: List[str] = None
 ):
-    """Save extracted Telegram IDs to files"""
-    
+    """Save extracted Telegram IDs to files, with incremental update and change report."""
     os.makedirs(output_dir, exist_ok=True)
     
     # Remove duplicates while preserving order
@@ -123,7 +130,16 @@ def save_results(
         logger.warning("No Telegram IDs found to save")
         return
     
-    # Save as Python module (list of URLs)
+    # Determine changes
+    added = []
+    removed = []
+    if incremental and previous_ids is not None:
+        prev_set = set(previous_ids)
+        curr_set = set(unique_ids)
+        added = list(curr_set - prev_set)
+        removed = list(prev_set - curr_set)
+    
+    # Save as Python module
     if output_format in ['json', 'both']:
         py_path = os.path.join(output_dir, config.OUTPUT_JSON)
         source_urls = [f"https://t.me/s/{id_.lstrip('@')}" for id_ in unique_ids]
@@ -141,13 +157,32 @@ def save_results(
                 json.dump(full_data, f, indent=2, ensure_ascii=False)
             logger.info(f"Saved full data to: {full_json_path}")
     
-    # Save as TXT (simple list of @ids)
+    # Save as TXT
     if output_format in ['txt', 'both']:
         txt_path = os.path.join(output_dir, config.OUTPUT_TXT)
         with open(txt_path, 'w', encoding='utf-8') as f:
             for id_ in unique_ids:
                 f.write(f"{id_}\n")
         logger.info(f"Saved TXT to: {txt_path}")
+    
+    # Save change report
+    if incremental and (added or removed):
+        changes_path = os.path.join(output_dir, config.OUTPUT_CHANGES_TXT)
+        with open(changes_path, 'w', encoding='utf-8') as f:
+            if added:
+                f.write("Added IDs:\n")
+                for id_ in sorted(added):
+                    f.write(f"  + {id_}\n")
+            if removed:
+                f.write("Removed IDs:\n")
+                for id_ in sorted(removed):
+                    f.write(f"  - {id_}\n")
+        logger.info(f"Saved change report to: {changes_path}")
+    
+    # Log summary
+    logger.info(f"Total unique IDs: {len(unique_ids)}")
+    if incremental:
+        logger.info(f"New IDs: {len(added)}, Removed IDs: {len(removed)}")
 
 
 def main():
@@ -175,7 +210,7 @@ def main():
                 sys.exit(1)
             
             logger.info(f"Found {len(url_list)} URLs in input file")
-            links = collect_links_from_urls(url_list, logger)
+            links = collect_links_from_urls(url_list, logger, max_workers=args.workers)
         
         else:
             logger.error("Either --input-file or --url must be specified")
@@ -186,6 +221,13 @@ def main():
             sys.exit(1)
         
         logger.info(f"Total config lines collected: {len(links)}")
+        
+        # Load previous IDs for incremental update
+        previous_ids = []
+        if not args.no_incremental:
+            txt_path = os.path.join(args.output, config.OUTPUT_TXT)
+            previous_ids = load_previous_ids(txt_path)
+            logger.info(f"Loaded {len(previous_ids)} previous IDs")
         
         parser = Parser()
         results = parser.parse_links(links)
@@ -199,12 +241,19 @@ def main():
                 telegram_ids.extend(ids)
                 full_data.append(result)
         
+        # Save intermediate results (in case of crash)
+        if args.output:
+            temp_path = os.path.join(args.output, config.OUTPUT_TXT + ".intermediate")
+            save_intermediate_results(telegram_ids, temp_path)
+        
         save_results(
             telegram_ids=telegram_ids,
             output_dir=args.output,
             output_format=args.format,
             full_data=full_data,
-            logger=logger
+            logger=logger,
+            incremental=not args.no_incremental,
+            previous_ids=previous_ids
         )
         
         unique_count = len(set(telegram_ids))
