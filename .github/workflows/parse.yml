@@ -9,7 +9,7 @@ jobs:
   parse:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # разрешаем коммитить изменения
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -33,11 +33,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          # Ensure output directory exists
           mkdir -p output
-          # Force-add the generated files, even if they are ignored by .gitignore
-          git add -f output/telegram_ids.txt output/telegram_ids.json || true
-          # Commit only if there are changes
+          # Добавляем оба файла: Python-модуль и TXT
+          git add -f output/telegram_ids.py output/telegram_ids.txt || true
           git diff --staged --quiet || git commit -m "Update Telegram IDs (auto)"
           git push
         env:
