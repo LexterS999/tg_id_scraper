@@ -1,3 +1,5 @@
+https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/vless.txt
+https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/trojan.txt
 https://raw.githubusercontent.com/MustafaBaqer/VestraNet-Nodes/main/subscriptions/mix-base64.txt
 https://github.com/Delta-Kronecker/V2ray-Config/raw/refs/heads/main/config/all_configs.txt
 https://raw.githubusercontent.com/barry-far/V2ray-config/main/Splitted-By-Protocol/vless.txt
