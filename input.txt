@@ -21,3 +21,4 @@ https://raw.githubusercontent.com/kort0881/vpn-aggregator/main/out/subs/eu_sub_5
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/vless.txt
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/trojan.txt
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/hy2.txt
+https://raw.githubusercontent.com/Surfboardv2ray/xhttp-parser/refs/heads/main/output/xhttp.txt
