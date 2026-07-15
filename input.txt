@@ -22,3 +22,4 @@ https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/vless.txt
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/trojan.txt
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/hy2.txt
 https://raw.githubusercontent.com/Surfboardv2ray/xhttp-parser/refs/heads/main/output/xhttp.txt
+https://raw.githubusercontent.com/kort0881/vpn-vless-configs-russia/refs/heads/main/data/githubmirror/clean/vless.txt
