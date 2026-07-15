@@ -13,11 +13,6 @@ https://github.com/VOID-Anonymity/V.O.I.D-VPN_Bypass/raw/refs/heads/main/url_wor
 https://raw.githubusercontent.com/V2RayRoot/V2RayConfig/refs/heads/main/Config/vless.txt
 https://raw.githubusercontent.com/roosterkid/openproxylist/main/V2RAY_RAW.txt
 https://raw.githubusercontent.com/ByeWhiteLists/ByeWhiteLists2/refs/heads/main/ByeWhiteLists2.txt
-https://raw.githubusercontent.com/kort0881/vpn-aggregator/main/out/subs/eu_sub_1.txt
-https://raw.githubusercontent.com/kort0881/vpn-aggregator/main/out/subs/eu_sub_2.txt
-https://raw.githubusercontent.com/kort0881/vpn-aggregator/main/out/subs/eu_sub_3.txt
-https://raw.githubusercontent.com/kort0881/vpn-aggregator/main/out/subs/eu_sub_4.txt
-https://raw.githubusercontent.com/kort0881/vpn-aggregator/main/out/subs/eu_sub_5.txt
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/vless.txt
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/trojan.txt
 https://raw.githubusercontent.com/wiki/gfpcom/free-proxy-list/lists/hy2.txt
