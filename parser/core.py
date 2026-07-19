@@ -6,7 +6,8 @@ import re
 import logging
 import base64
 import json
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Union
+from functools import lru_cache
 from urllib.parse import urlparse, parse_qs
 
 from .utils import load_links_from_file, load_links_from_url
@@ -37,34 +38,40 @@ class Parser:
             # Try to parse as JSON
             data = json.loads(decoded)
             return data
-        except Exception:
+        except json.JSONDecodeError as e:
+            logger.debug(f"JSON decode error in base64: {e}")
+            return None
+        except Exception as e:
+            logger.debug(f"Base64 decode error: {e}")
             return None
     
-    def _extract_ids_from_dict(self, obj: Dict[str, Any], depth: int = 0) -> List[str]:
-        """Recursively extract Telegram IDs from all string values in a dict."""
+    def _extract_ids_from_dict_iter(self, obj: Dict[str, Any]) -> List[str]:
+        """Iteratively extract Telegram IDs from all string values in a dict (avoid recursion)."""
         ids = []
-        if depth > 5:  # safety limit
-            return ids
-        for key, value in obj.items():
-            if isinstance(value, str):
-                found = extract_telegram_ids(value)
-                if found:
-                    ids.extend(found)
-                # Also try cleaning
-                cleaned = extract_clean_telegram_id(value)
-                if cleaned:
-                    ids.append(cleaned)
-            elif isinstance(value, dict):
-                ids.extend(self._extract_ids_from_dict(value, depth+1))
-            elif isinstance(value, list):
-                for item in value:
-                    if isinstance(item, str):
-                        found = extract_telegram_ids(item)
+        stack = [obj]
+        while stack:
+            current = stack.pop()
+            if isinstance(current, dict):
+                for key, value in current.items():
+                    if isinstance(value, str):
+                        found = extract_telegram_ids(value)
                         if found:
                             ids.extend(found)
-                    elif isinstance(item, dict):
-                        ids.extend(self._extract_ids_from_dict(item, depth+1))
+                        cleaned = extract_clean_telegram_id(value)
+                        if cleaned:
+                            ids.append(cleaned)
+                    elif isinstance(value, dict):
+                        stack.append(value)
+                    elif isinstance(value, list):
+                        stack.extend(value)
+            elif isinstance(current, list):
+                stack.extend(current)
         return ids
+
+    @lru_cache(maxsize=config.CACHE_MAX_SIZE)
+    def _parse_link_cached(self, link: str) -> Optional[Dict]:
+        """Cached version of parse_link."""
+        return self.parse_link(link)
 
     def parse_link(self, link: str) -> Optional[Dict]:
         """
@@ -123,7 +130,9 @@ class Parser:
             result.update(parsed)
         except Exception as e:
             logger.debug(f"Error parsing link: {e}")
-            return None
+            # Return partial result anyway
+            result['parse_error'] = str(e)
+            return result
         
         # If we have decoded data, merge it
         if decoded_data:
@@ -152,7 +161,7 @@ class Parser:
                 if cleaned:
                     all_ids.append(cleaned)
             elif isinstance(value, dict):
-                ids = self._extract_ids_from_dict(value)
+                ids = self._extract_ids_from_dict_iter(value)
                 all_ids.extend(ids)
             elif isinstance(value, list):
                 for item in value:
@@ -164,7 +173,7 @@ class Parser:
                         if cleaned:
                             all_ids.append(cleaned)
                     elif isinstance(item, dict):
-                        ids = self._extract_ids_from_dict(item)
+                        ids = self._extract_ids_from_dict_iter(item)
                         all_ids.extend(ids)
         
         # Remove duplicates and keep only valid @username
