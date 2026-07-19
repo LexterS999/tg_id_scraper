@@ -2,7 +2,7 @@ name: Scraping TG IDs
 
 on:
   schedule:
-    - cron: '0 */3 * * *'
+    - cron: '0 */5 * * *'
   workflow_dispatch:
 
 jobs:
@@ -25,16 +25,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run parser with input.txt
+      - name: Run parser with input.txt (async mode)
         run: |
-          python main.py --input-file input.txt --output output --workers 15
+          python main.py --input-file input.txt --output output --workers 20 --async
 
       - name: Commit and push if changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           mkdir -p output
-          git add -f output/telegram_ids.py output/telegram_ids.txt output/changes.txt || true
+          # Добавляем только существующие файлы (telegram_ids.py больше не создаётся)
+          git add -f output/telegram_ids.txt output/parsed_configs.json output/changes.txt output/metadata.json || true
           git diff --staged --quiet || git commit -m "Update Telegram IDs (auto)"
           git push
         env:
