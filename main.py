@@ -8,28 +8,53 @@ import sys
 import argparse
 import logging
 import json
+import asyncio
 from typing import List, Optional, Set
+from pathlib import Path
+from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
-import time
+from urllib.parse import urlparse
 
 from parser.core import Parser
 from parser.utils import (
     load_links_from_file,
     load_links_from_url,
     load_previous_ids,
-    save_intermediate_results
+    save_intermediate_results,
+    save_metadata
 )
+from parser.async_utils import fetch_all_links
 from parser.extractors import extract_telegram_ids
 import config
 
 
 def setup_logging(verbose: bool = False):
     level = logging.DEBUG if verbose else logging.INFO
-    logging.basicConfig(
-        level=level,
-        format='%(asctime)s - %(levelname)s - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
+    # Use rotating file handler
+    from logging.handlers import RotatingFileHandler
+    
+    logger = logging.getLogger()
+    logger.setLevel(level)
+    
+    # Console handler
+    console = logging.StreamHandler()
+    console.setLevel(level)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    console.setFormatter(formatter)
+    logger.addHandler(console)
+    
+    # File handler with rotation
+    log_path = Path(config.LOG_FILE)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    file_handler = RotatingFileHandler(
+        log_path,
+        maxBytes=config.LOG_MAX_BYTES,
+        backupCount=config.LOG_BACKUP_COUNT
     )
+    file_handler.setLevel(level)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(file_handler)
+    
     return logging.getLogger(__name__)
 
 
@@ -42,6 +67,7 @@ Examples:
   python main.py --input-file input.txt
   python main.py -i subscriptions.txt -o results
   python main.py -u https://example.com/configs.txt -o output -v
+  python main.py -i input.txt --output-format jsonl
         """
     )
     
@@ -64,9 +90,9 @@ Examples:
     parser.add_argument(
         '-f', '--format',
         type=str,
-        choices=['json', 'txt', 'both'],
+        choices=['json', 'txt', 'both', 'jsonl'],
         default=config.DEFAULT_OUTPUT_FORMAT,
-        help=f"Output format: json, txt, or both (default: {config.DEFAULT_OUTPUT_FORMAT})"
+        help=f"Output format: json, txt, both, or jsonl (default: {config.DEFAULT_OUTPUT_FORMAT})"
     )
     parser.add_argument(
         '-v', '--verbose',
@@ -84,14 +110,37 @@ Examples:
         action='store_true',
         help="Disable incremental update (always overwrite output)"
     )
+    parser.add_argument(
+        '--async',
+        dest='async_mode',
+        action='store_true',
+        help="Use asynchronous downloading (aiohttp) for better performance"
+    )
     return parser.parse_args()
 
 
-def collect_links_from_urls(url_list: List[str], logger: logging.Logger, max_workers: int = 10) -> List[str]:
+def is_valid_url(url: str) -> bool:
+    """Check if a string is a valid HTTP/HTTPS/file URL."""
+    try:
+        parsed = urlparse(url)
+        return parsed.scheme in ('http', 'https', 'file')
+    except Exception:
+        return False
+
+
+def collect_links_from_urls_sync(url_list: List[str], logger: logging.Logger, max_workers: int = 10) -> List[str]:
+    """Synchronous collection using ThreadPoolExecutor."""
     all_links = []
     urls = [u.strip() for u in url_list if u.strip() and not u.startswith('#')]
     if not urls:
         return all_links
+
+    # Validate URLs
+    valid_urls = [u for u in urls if is_valid_url(u)]
+    invalid_urls = [u for u in urls if not is_valid_url(u)]
+    if invalid_urls:
+        logger.warning(f"Skipping invalid URLs: {invalid_urls}")
+    urls = valid_urls
 
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_url = {executor.submit(load_links_from_url, url): url for url in urls}
@@ -106,6 +155,19 @@ def collect_links_from_urls(url_list: List[str], logger: logging.Logger, max_wor
     return all_links
 
 
+async def collect_links_from_urls_async(url_list: List[str], logger: logging.Logger, max_workers: int = 10) -> List[str]:
+    """Asynchronous collection using aiohttp."""
+    urls = [u.strip() for u in url_list if u.strip() and not u.startswith('#')]
+    if not urls:
+        return []
+    valid_urls = [u for u in urls if is_valid_url(u)]
+    invalid_urls = [u for u in urls if not is_valid_url(u)]
+    if invalid_urls:
+        logger.warning(f"Skipping invalid URLs: {invalid_urls}")
+    urls = valid_urls
+    return await fetch_all_links(urls, max_workers=max_workers)
+
+
 def save_results(
     telegram_ids: List[str],
     output_dir: str,
@@ -113,10 +175,12 @@ def save_results(
     full_data: Optional[List[dict]] = None,
     logger: logging.Logger = None,
     incremental: bool = True,
-    previous_ids: List[str] = None
+    previous_ids: List[str] = None,
+    metadata: Optional[dict] = None
 ):
     """Save extracted Telegram IDs to files, with incremental update and change report."""
-    os.makedirs(output_dir, exist_ok=True)
+    output_path = Path(output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
     
     # Remove duplicates while preserving order
     unique_ids = []
@@ -139,36 +203,32 @@ def save_results(
         added = list(curr_set - prev_set)
         removed = list(prev_set - curr_set)
     
-    # Save as Python module
-    if output_format in ['json', 'both']:
-        py_path = os.path.join(output_dir, config.OUTPUT_JSON)
-        source_urls = [f"https://t.me/s/{id_.lstrip('@')}" for id_ in unique_ids]
-        py_content = "SOURCE_URLS = [\n"
-        for url in source_urls:
-            py_content += f'    "{url}",\n'
-        py_content += "]"
-        with open(py_path, 'w', encoding='utf-8') as f:
-            f.write(py_content)
-        logger.info(f"Saved Python module to: {py_path}")
-        
-        if full_data:
-            full_json_path = os.path.join(output_dir, config.OUTPUT_FULL_JSON)
-            with open(full_json_path, 'w', encoding='utf-8') as f:
-                json.dump(full_data, f, indent=2, ensure_ascii=False)
-            logger.info(f"Saved full data to: {full_json_path}")
+    # Save as TXT (always)
+    txt_path = output_path / config.OUTPUT_TXT
+    with txt_path.open('w', encoding='utf-8') as f:
+        for id_ in unique_ids:
+            f.write(f"{id_}\n")
+    logger.info(f"Saved TXT to: {txt_path}")
     
-    # Save as TXT
-    if output_format in ['txt', 'both']:
-        txt_path = os.path.join(output_dir, config.OUTPUT_TXT)
-        with open(txt_path, 'w', encoding='utf-8') as f:
+    # Save as JSON (if requested)
+    if output_format in ['json', 'both']:
+        json_path = output_path / config.OUTPUT_FULL_JSON
+        with json_path.open('w', encoding='utf-8') as f:
+            json.dump(full_data, f, indent=2, ensure_ascii=False)
+        logger.info(f"Saved full data to: {json_path}")
+    
+    # Save as JSON Lines (if requested)
+    if output_format == 'jsonl':
+        jsonl_path = output_path / "telegram_ids.jsonl"
+        with jsonl_path.open('w', encoding='utf-8') as f:
             for id_ in unique_ids:
-                f.write(f"{id_}\n")
-        logger.info(f"Saved TXT to: {txt_path}")
+                f.write(json.dumps({"id": id_}) + "\n")
+        logger.info(f"Saved JSON Lines to: {jsonl_path}")
     
     # Save change report
     if incremental and (added or removed):
-        changes_path = os.path.join(output_dir, config.OUTPUT_CHANGES_TXT)
-        with open(changes_path, 'w', encoding='utf-8') as f:
+        changes_path = output_path / config.OUTPUT_CHANGES_TXT
+        with changes_path.open('w', encoding='utf-8') as f:
             if added:
                 f.write("Added IDs:\n")
                 for id_ in sorted(added):
@@ -179,30 +239,37 @@ def save_results(
                     f.write(f"  - {id_}\n")
         logger.info(f"Saved change report to: {changes_path}")
     
+    # Save metadata
+    if metadata:
+        save_metadata(metadata, output_dir)
+    
     # Log summary
     logger.info(f"Total unique IDs: {len(unique_ids)}")
     if incremental:
         logger.info(f"New IDs: {len(added)}, Removed IDs: {len(removed)}")
 
 
-def main():
-    args = parse_arguments()
-    logger = setup_logging(args.verbose)
-    
+async def async_main(args, logger):
     links = []
+    start_time = datetime.now()
     
     try:
         if args.url:
             logger.info(f"Downloading from single URL: {args.url}")
-            links = load_links_from_url(args.url)
+            if args.async_mode:
+                # Single URL async
+                links = await fetch_all_links([args.url], max_workers=1)
+            else:
+                links = load_links_from_url(args.url)
         
         elif args.input_file:
-            if not os.path.exists(args.input_file):
+            input_path = Path(args.input_file)
+            if not input_path.exists():
                 logger.error(f"Input file not found: {args.input_file}")
                 sys.exit(1)
             
             logger.info(f"Reading URL list from: {args.input_file}")
-            with open(args.input_file, 'r', encoding='utf-8') as f:
+            with input_path.open('r', encoding='utf-8') as f:
                 url_list = [line.strip() for line in f if line.strip() and not line.startswith('#')]
             
             if not url_list:
@@ -210,7 +277,10 @@ def main():
                 sys.exit(1)
             
             logger.info(f"Found {len(url_list)} URLs in input file")
-            links = collect_links_from_urls(url_list, logger, max_workers=args.workers)
+            if args.async_mode:
+                links = await collect_links_from_urls_async(url_list, logger, max_workers=args.workers)
+            else:
+                links = collect_links_from_urls_sync(url_list, logger, max_workers=args.workers)
         
         else:
             logger.error("Either --input-file or --url must be specified")
@@ -225,8 +295,8 @@ def main():
         # Load previous IDs for incremental update
         previous_ids = []
         if not args.no_incremental:
-            txt_path = os.path.join(args.output, config.OUTPUT_TXT)
-            previous_ids = load_previous_ids(txt_path)
+            txt_path = Path(args.output) / config.OUTPUT_TXT
+            previous_ids = load_previous_ids(str(txt_path))
             logger.info(f"Loaded {len(previous_ids)} previous IDs")
         
         parser = Parser()
@@ -243,8 +313,24 @@ def main():
         
         # Save intermediate results (in case of crash)
         if args.output:
-            temp_path = os.path.join(args.output, config.OUTPUT_TXT + ".intermediate")
-            save_intermediate_results(telegram_ids, temp_path)
+            temp_path = Path(args.output) / (config.OUTPUT_TXT + ".intermediate")
+            save_intermediate_results(telegram_ids, str(temp_path))
+        
+        # Prepare metadata
+        metadata = {
+            "run_time": start_time.isoformat(),
+            "duration_seconds": (datetime.now() - start_time).total_seconds(),
+            "input_file": args.input_file,
+            "url": args.url,
+            "total_links": len(links),
+            "parsed_results": len(results),
+            "unique_ids": len(set(telegram_ids)),
+            "total_occurrences": len(telegram_ids),
+            "output_format": args.format,
+            "async_mode": args.async_mode,
+            "workers": args.workers,
+            "incremental": not args.no_incremental
+        }
         
         save_results(
             telegram_ids=telegram_ids,
@@ -253,7 +339,8 @@ def main():
             full_data=full_data,
             logger=logger,
             incremental=not args.no_incremental,
-            previous_ids=previous_ids
+            previous_ids=previous_ids,
+            metadata=metadata
         )
         
         unique_count = len(set(telegram_ids))
@@ -270,6 +357,20 @@ def main():
             import traceback
             traceback.print_exc()
         sys.exit(1)
+
+
+def main():
+    args = parse_arguments()
+    logger = setup_logging(args.verbose)
+    
+    if args.async_mode:
+        asyncio.run(async_main(args, logger))
+    else:
+        # Run synchronous version
+        # We'll reuse async_main but with async_mode False, but simpler: just call a sync version
+        # For simplicity, we'll adapt the logic: we'll create a wrapper that runs async_main with sync_mode fallback
+        # But to avoid duplication, we'll just run async_main with args (it will handle both)
+        asyncio.run(async_main(args, logger))
 
 
 if __name__ == "__main__":
