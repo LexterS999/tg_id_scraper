@@ -38,8 +38,7 @@ LOG_MAX_BYTES = 10 * 1024 * 1024  # 10 MB
 LOG_BACKUP_COUNT = 5
 
 # Output filenames
-OUTPUT_JSON = "telegram_ids.py"      # Python module (deprecated, will be removed)
-OUTPUT_TXT = "telegram_ids.txt"      # Simple list
+OUTPUT_TXT = "telegram_ids.txt"      # Simple list (now contains URLs)
 OUTPUT_FULL_JSON = "parsed_configs.json"
 OUTPUT_CHANGES_TXT = "changes.txt"   # Report of changes
 OUTPUT_METADATA_JSON = "metadata.json"  # Run metadata
@@ -64,5 +63,4 @@ USER_AGENTS = [
 ]
 
 def get_random_user_agent() -> str:
-    """Return a random User-Agent from the list."""
     return random.choice(USER_AGENTS)
