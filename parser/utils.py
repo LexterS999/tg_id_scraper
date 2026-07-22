@@ -7,6 +7,7 @@ import json
 import logging
 import time
 import random
+import gzip
 from typing import List, Optional, Dict, Any
 from pathlib import Path
 from functools import lru_cache
@@ -113,11 +114,35 @@ def load_links_from_url_stream(url: str, max_lines: int = config.MAX_LINES, time
     except requests.RequestException as e:
         raise Exception(f"Error streaming URL {url}: {e}")
 
-def save_json(data, file_path: str, indent: int = 2):
+def save_json(data, file_path: str, indent: int = 2, compress: bool = True):
+    """
+    Save JSON data to a file, optionally with gzip compression.
+    
+    Args:
+        data: Data to serialize
+        file_path: Path to the output file (without .gz extension if compress=True)
+        indent: Indentation for pretty printing
+        compress: If True, saves as file_path + '.gz' using gzip compression
+    
+    Returns:
+        Path to the saved file (with .gz extension if compressed)
+    """
     path = Path(file_path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open('w', encoding='utf-8') as f:
-        json.dump(data, f, indent=indent, ensure_ascii=False)
+    
+    if compress:
+        # Save as .json.gz
+        gz_path = path.with_suffix(path.suffix + '.gz')
+        with gzip.open(gz_path, 'wt', encoding='utf-8') as f:
+            json.dump(data, f, indent=indent, ensure_ascii=False)
+        logger.debug(f"Saved compressed JSON to {gz_path}")
+        return gz_path
+    else:
+        # Regular JSON
+        with path.open('w', encoding='utf-8') as f:
+            json.dump(data, f, indent=indent, ensure_ascii=False)
+        logger.debug(f"Saved JSON to {path}")
+        return path
 
 def load_previous_ids(file_path: str) -> List[str]:
     """Load previously saved Telegram IDs from a file."""
