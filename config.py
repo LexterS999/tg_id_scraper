@@ -50,6 +50,9 @@ CACHE_MAX_SIZE = 128
 # Default number of parallel workers
 DEFAULT_WORKERS = 10
 
+# Retry settings
+DEFAULT_RETRIES = 3
+
 # User-Agent rotation
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
