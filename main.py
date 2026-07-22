@@ -9,11 +9,12 @@ import argparse
 import logging
 import json
 import asyncio
-from typing import List, Optional, Set
+from typing import List, Optional, Set, Dict, Any
 from pathlib import Path
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.parse import urlparse
+from collections import Counter
 
 from parser.core import Parser
 from parser.utils import (
@@ -40,9 +41,9 @@ def setup_logging(verbose: bool = False):
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)  # Все уровни обрабатываются
 
-    # Консольный обработчик — только ERROR и выше
+    # Консольный обработчик — только ERROR и выше (если не verbose)
     console = logging.StreamHandler()
-    console.setLevel(logging.ERROR if not verbose else logging.INFO)
+    console.setLevel(logging.INFO if verbose else logging.ERROR)
     console_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     console.setFormatter(console_formatter)
     logger.addHandler(console)
@@ -150,7 +151,7 @@ def collect_links_from_urls_sync(url_list: List[str], logger: logging.Logger, ma
             try:
                 links = future.result()
                 all_links.extend(links)
-                logger.debug(f"Got {len(links)} config lines from {url}")
+                logger.info(f"Downloaded {len(links)} config lines from {url}")
             except Exception as e:
                 logger.error(f"Failed to fetch {url}: {e}")
     return all_links
@@ -166,6 +167,75 @@ async def collect_links_from_urls_async(url_list: List[str], logger: logging.Log
         logger.warning(f"Skipping invalid URLs: {invalid_urls}")
     urls = valid_urls
     return await fetch_all_links(urls, max_workers=max_workers)
+
+
+def generate_summary(
+    sources_count: int,
+    sources_loaded: int,
+    total_config_lines: int,
+    parsed_count: int,
+    parsed_with_ids: int,
+    total_id_occurrences: int,
+    unique_ids: int,
+    protocol_counts: Dict[str, int],
+    incremental: bool,
+    added: List[str],
+    removed: List[str],
+    duration: float,
+    output_dir: str
+) -> str:
+    """Генерирует текстовую сводку результатов."""
+    lines = []
+    lines.append("=" * 60)
+    lines.append("📊 SUMMARY")
+    lines.append("=" * 60)
+    lines.append(f"Sources (URLs)          : {sources_count} total, {sources_loaded} loaded successfully")
+    lines.append(f"Config lines collected  : {total_config_lines}")
+    lines.append(f"Parsed successfully     : {parsed_count}")
+    lines.append(f"Containing Telegram IDs : {parsed_with_ids}")
+    lines.append(f"Total ID occurrences    : {total_id_occurrences}")
+    lines.append(f"Unique IDs              : {unique_ids}")
+    if incremental:
+        lines.append(f"Added (new)             : {len(added)}")
+        lines.append(f"Removed (expired)       : {len(removed)}")
+    lines.append(f"Duration                : {duration:.2f} seconds")
+    lines.append(f"Output directory        : {output_dir}")
+    if protocol_counts:
+        lines.append("")
+        lines.append("Protocol distribution:")
+        for proto, count in sorted(protocol_counts.items(), key=lambda x: -x[1]):
+            lines.append(f"  {proto:12s} : {count}")
+    lines.append("=" * 60)
+    return "\n".join(lines)
+
+
+def print_summary(
+    sources_count: int,
+    sources_loaded: int,
+    total_config_lines: int,
+    parsed_count: int,
+    parsed_with_ids: int,
+    total_id_occurrences: int,
+    unique_ids: int,
+    protocol_counts: Dict[str, int],
+    incremental: bool,
+    added: List[str],
+    removed: List[str],
+    duration: float,
+    output_dir: str,
+    logger: logging.Logger
+):
+    """Выводит сводку в консоль и в лог."""
+    summary = generate_summary(
+        sources_count, sources_loaded, total_config_lines,
+        parsed_count, parsed_with_ids, total_id_occurrences,
+        unique_ids, protocol_counts, incremental, added, removed,
+        duration, output_dir
+    )
+    # В консоль всегда печатаем (пользователь видит)
+    print(summary)
+    # В лог пишем как INFO
+    logger.info("\n" + summary)
 
 
 def save_results(
@@ -244,24 +314,26 @@ def save_results(
     if metadata:
         save_metadata(metadata, output_dir)
 
-    # Итоговая статистика (выводим в консоль, так как это важно)
-    print(f"\n✅ Extraction complete. Total unique IDs: {len(unique_ids)}")
-    if incremental:
-        print(f"   New: {len(added)}, Removed: {len(removed)}")
-    print(f"   Output: {txt_path}\n")
+    # Возвращаем added, removed, unique_ids для сводки
+    return added, removed, unique_ids
 
 
 async def async_main(args, logger):
     links = []
     start_time = datetime.now()
+    sources_loaded = 0
+    sources_count = 0
 
     try:
         if args.url:
             logger.info(f"Downloading from single URL: {args.url}")
+            sources_count = 1
             if args.async_mode:
                 links = await fetch_all_links([args.url], max_workers=1)
             else:
                 links = load_links_from_url(args.url)
+            if links:
+                sources_loaded = 1
 
         elif args.input_file:
             input_path = Path(args.input_file)
@@ -277,11 +349,15 @@ async def async_main(args, logger):
                 logger.error("No URLs found in input file")
                 sys.exit(1)
 
-            logger.info(f"Found {len(url_list)} URLs in input file")
+            sources_count = len(url_list)
+            logger.info(f"Found {sources_count} URLs in input file")
             if args.async_mode:
                 links = await collect_links_from_urls_async(url_list, logger, max_workers=args.workers)
             else:
                 links = collect_links_from_urls_sync(url_list, logger, max_workers=args.workers)
+            # Приблизительно считаем успешно загруженные — если ссылок больше 0, считаем, что загружено успешно
+            # Более точно можно было бы считать, но это не критично
+            sources_loaded = len(url_list) if links else 0
 
         else:
             logger.error("Either --input-file or --url must be specified")
@@ -305,17 +381,32 @@ async def async_main(args, logger):
 
         telegram_ids = []
         full_data = []
+        protocol_counter = Counter()
 
         for result in results:
             ids = result.get('found_telegram_ids', [])
             if ids:
                 telegram_ids.extend(ids)
                 full_data.append(result)
+                # Считаем протоколы
+                proto = result.get('protocol', 'unknown')
+                protocol_counter[proto] += 1
 
         # Save intermediate results (in case of crash)
         if args.output:
             temp_path = Path(args.output) / (config.OUTPUT_TXT + ".intermediate")
             save_intermediate_results(telegram_ids, str(temp_path))
+
+        # Сохраняем результаты и получаем статистику изменений
+        added, removed, unique_ids = save_results(
+            telegram_ids=telegram_ids,
+            output_dir=args.output,
+            output_format=args.format,
+            full_data=full_data,
+            logger=logger,
+            incremental=not args.no_incremental,
+            previous_ids=previous_ids
+        )
 
         # Metadata
         metadata = {
@@ -325,27 +416,41 @@ async def async_main(args, logger):
             "url": args.url,
             "total_links": len(links),
             "parsed_results": len(results),
-            "unique_ids": len(set(telegram_ids)),
+            "unique_ids": len(unique_ids),
             "total_occurrences": len(telegram_ids),
             "output_format": args.format,
             "async_mode": args.async_mode,
             "workers": args.workers,
-            "incremental": not args.no_incremental
+            "incremental": not args.no_incremental,
+            "sources_count": sources_count,
+            "sources_loaded": sources_loaded
         }
+        save_metadata(metadata, args.output)
 
-        save_results(
-            telegram_ids=telegram_ids,
-            output_dir=args.output,
-            output_format=args.format,
-            full_data=full_data,
-            logger=logger,
+        # Выводим сводку
+        parsed_with_ids = len(full_data)
+        total_id_occurrences = len(telegram_ids)
+        unique_count = len(unique_ids)
+        duration = (datetime.now() - start_time).total_seconds()
+
+        print_summary(
+            sources_count=sources_count,
+            sources_loaded=sources_loaded,
+            total_config_lines=len(links),
+            parsed_count=len(results),
+            parsed_with_ids=parsed_with_ids,
+            total_id_occurrences=total_id_occurrences,
+            unique_ids=unique_count,
+            protocol_counts=dict(protocol_counter),
             incremental=not args.no_incremental,
-            previous_ids=previous_ids,
-            metadata=metadata
+            added=added if not args.no_incremental else [],
+            removed=removed if not args.no_incremental else [],
+            duration=duration,
+            output_dir=args.output,
+            logger=logger
         )
 
-        unique_count = len(set(telegram_ids))
-        logger.info(f"Found {len(telegram_ids)} occurrences, {unique_count} unique IDs")
+        logger.info(f"Found {total_id_occurrences} occurrences, {unique_count} unique IDs")
 
     except Exception as e:
         logger.error(f"Error: {e}")
