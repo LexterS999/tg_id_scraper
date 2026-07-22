@@ -1,16 +1,16 @@
 {
-  "run_time": "2026-07-22T11:42:28.398011",
-  "duration_seconds": 30.935628,
+  "run_time": "2026-07-22T12:59:55.003388",
+  "duration_seconds": 43.979978,
   "input_file": "input.txt",
   "url": null,
-  "total_links": 268910,
-  "parsed_results": 264427,
-  "unique_ids": 8754,
-  "total_occurrences": 207879,
+  "total_links": 323478,
+  "parsed_results": 287914,
+  "unique_ids": 8816,
+  "total_occurrences": 221536,
   "output_format": "both",
   "async_mode": true,
   "workers": 20,
   "incremental": true,
-  "sources_count": 48,
-  "sources_loaded": 48
+  "sources_count": 101,
+  "sources_loaded": 101
 }
