@@ -166,7 +166,11 @@ async def collect_links_from_urls_async(url_list: List[str], logger: logging.Log
     if invalid_urls:
         logger.warning(f"Skipping invalid URLs: {invalid_urls}")
     urls = valid_urls
-    return await fetch_all_links(urls, max_workers=max_workers)
+
+    logger.info(f"Fetching {len(urls)} URLs with {max_workers} workers")
+    results = await fetch_all_links(urls, max_workers=max_workers)
+    logger.info(f"Fetched {len(results)} config lines from {len(urls)} sources")
+    return results
 
 
 def generate_summary(
@@ -232,9 +236,7 @@ def print_summary(
         unique_ids, protocol_counts, incremental, added, removed,
         duration, output_dir
     )
-    # В консоль всегда печатаем (пользователь видит)
     print(summary)
-    # В лог пишем как INFO
     logger.info("\n" + summary)
 
 
@@ -355,8 +357,8 @@ async def async_main(args, logger):
                 links = await collect_links_from_urls_async(url_list, logger, max_workers=args.workers)
             else:
                 links = collect_links_from_urls_sync(url_list, logger, max_workers=args.workers)
-            # Приблизительно считаем успешно загруженные — если ссылок больше 0, считаем, что загружено успешно
-            # Более точно можно было бы считать, но это не критично
+
+            # sources_loaded — приблизительно, считаем что все загружены, если есть ссылки
             sources_loaded = len(url_list) if links else 0
 
         else:
@@ -364,8 +366,8 @@ async def async_main(args, logger):
             sys.exit(1)
 
         if not links:
-            logger.error("No config links found from any source")
-            sys.exit(1)
+            logger.warning("No config links collected from any source. Check your URLs.")
+            return
 
         logger.info(f"Total config lines collected: {len(links)}")
 
