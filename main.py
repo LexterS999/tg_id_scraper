@@ -21,7 +21,8 @@ from parser.utils import (
     load_links_from_url,
     load_previous_ids,
     save_intermediate_results,
-    save_metadata
+    save_metadata,
+    save_json
 )
 from parser.async_utils import fetch_all_links
 from parser.extractors import extract_telegram_ids
@@ -209,12 +210,11 @@ def save_results(
             f.write(f"https://t.me/s/{clean_id}\n")
     logger.info(f"Saved TXT (URLs) to: {txt_path}")
 
-    # JSON с полными данными (если требуется)
+    # JSON с полными данными (если требуется) — теперь со сжатием
     if output_format in ['json', 'both']:
         json_path = output_path / config.OUTPUT_FULL_JSON
-        with json_path.open('w', encoding='utf-8') as f:
-            json.dump(full_data, f, indent=2, ensure_ascii=False)
-        logger.info(f"Saved full data to: {json_path}")
+        save_json(full_data, str(json_path), compress=config.COMPRESS_JSON)
+        logger.info(f"Saved full data to: {json_path}" + (".gz" if config.COMPRESS_JSON else ""))
 
     # JSON Lines (если требуется)
     if output_format == 'jsonl':
