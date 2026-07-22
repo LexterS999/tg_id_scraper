@@ -62,5 +62,9 @@ USER_AGENTS = [
     "Mozilla/5.0 (Linux; Android 13; SM-G991B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.131 Mobile Safari/537.36"
 ]
 
+# Сжатие JSON
+COMPRESS_JSON = True  # если True, файл будет в формате .json.gz
+
+
 def get_random_user_agent() -> str:
     return random.choice(USER_AGENTS)
