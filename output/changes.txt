@@ -1589,6 +1589,7 @@ Added IDs:
   + https://t.me/s/FruItfUl
   + https://t.me/s/FsV2ray
   + https://t.me/s/Fservice
+  + https://t.me/s/FuseVPN
   + https://t.me/s/Fv2ray
   + https://t.me/s/G0dv2ray
   + https://t.me/s/GHALAGYANN
@@ -1624,6 +1625,7 @@ Added IDs:
   + https://t.me/s/HELIX_Servers
   + https://t.me/s/HKNTT1
   + https://t.me/s/HSHSHSJSJJSHSJJSJJEJJSHE
+  + https://t.me/s/HajmVPN_Config
   + https://t.me/s/Hatunnel_vpn
   + https://t.me/s/Hddify
   + https://t.me/s/Helix_Servers
@@ -1927,6 +1929,7 @@ Added IDs:
   + https://t.me/s/ProxyMY2
   + https://t.me/s/ProxyMY2Telegramjoin
   + https://t.me/s/ProxyMtAlpha
+  + https://t.me/s/ProxyPJ
   + https://t.me/s/ProxySnipe
   + https://t.me/s/ProxySnipeKST6LJ
   + https://t.me/s/ProxySnipeMH5RYF
@@ -2172,7 +2175,6 @@ Added IDs:
   + https://t.me/s/V2RAYNG_IP
   + https://t.me/s/V2RAYNPLUS
   + https://t.me/s/V2RAYROZ
-  + https://t.me/s/V2RAYSEVEN
   + https://t.me/s/V2RAY_GOD
   + https://t.me/s/V2RAY_SPATIAL
   + https://t.me/s/V2RAY_STRING
@@ -2198,7 +2200,6 @@ Added IDs:
   + https://t.me/s/V2eayNG3
   + https://t.me/s/V2fetch
   + https://t.me/s/V2kingfree
-  + https://t.me/s/V2mamad
   + https://t.me/s/V2net_iran
   + https://t.me/s/V2ngFast
   + https://t.me/s/V2ngnet
@@ -2344,6 +2345,7 @@ Added IDs:
   + https://t.me/s/Watashi_VPN
   + https://t.me/s/WebShecan
   + https://t.me/s/Webshecan
+  + https://t.me/s/WedBaZ
   + https://t.me/s/WireXnet
   + https://t.me/s/WomanLifeFreedomVPN
   + https://t.me/s/Wor11
@@ -3015,7 +3017,6 @@ Added IDs:
   + https://t.me/s/binex
   + https://t.me/s/biographi
   + https://t.me/s/biography
-  + https://t.me/s/biomaze
   + https://t.me/s/birdb0xbarcelona
   + https://t.me/s/bisque
   + https://t.me/s/bitbarg
@@ -3508,7 +3509,6 @@ Added IDs:
   + https://t.me/s/cyprushotelinfo
   + https://t.me/s/cyylr
   + https://t.me/s/cz188
-  + https://t.me/s/cze01
   + https://t.me/s/czech
   + https://t.me/s/czechia
   + https://t.me/s/czre1
@@ -3897,7 +3897,6 @@ Added IDs:
   + https://t.me/s/equal
   + https://t.me/s/equipped
   + https://t.me/s/erfan
-  + https://t.me/s/erfanandroid
   + https://t.me/s/erfwp
   + https://t.me/s/ergwork
   + https://t.me/s/erosan
@@ -4021,7 +4020,6 @@ Added IDs:
   + https://t.me/s/fasterdew
   + https://t.me/s/fastfoodazar
   + https://t.me/s/fastip
-  + https://t.me/s/fastkanfig
   + https://t.me/s/fastli
   + https://t.me/s/fastly
   + https://t.me/s/fastly1
@@ -4348,6 +4346,7 @@ Added IDs:
   + https://t.me/s/gemrnakcie
   + https://t.me/s/general
   + https://t.me/s/general_sudo
+  + https://t.me/s/generalconfiig
   + https://t.me/s/generousbands
   + https://t.me/s/genius
   + https://t.me/s/gentle
@@ -4728,6 +4727,7 @@ Added IDs:
   + https://t.me/s/i10VPN
   + https://t.me/s/i7bor
   + https://t.me/s/i9club
+  + https://t.me/s/iCloudYshop
   + https://t.me/s/iMrV2ray
   + https://t.me/s/iNeronix
   + https://t.me/s/iP_CF
@@ -7243,6 +7243,7 @@ Added IDs:
   + https://t.me/s/shops
   + https://t.me/s/shortline
   + https://t.me/s/showip
+  + https://t.me/s/shown
   + https://t.me/s/shrkh
   + https://t.me/s/shveccxc1
   + https://t.me/s/shvurgceo
@@ -7587,7 +7588,6 @@ Added IDs:
   + https://t.me/s/sun49
   + https://t.me/s/sunder
   + https://t.me/s/sunfield
-  + https://t.me/s/sunflowerplato
   + https://t.me/s/sunnaquran05
   + https://t.me/s/sunup
   + https://t.me/s/suolar
@@ -7901,7 +7901,6 @@ Added IDs:
   + https://t.me/s/tungtungerman
   + https://t.me/s/tunmosh2
   + https://t.me/s/tunnel
-  + https://t.me/s/tunnel1
   + https://t.me/s/tunnle
   + https://t.me/s/tunnyl
   + https://t.me/s/tuntro006
@@ -8071,6 +8070,7 @@ Added IDs:
   + https://t.me/s/uuuuuuuuuu
   + https://t.me/s/uvgl4cjd0475
   + https://t.me/s/v1bsy2b9q5
+  + https://t.me/s/v1in2
   + https://t.me/s/v2202509298505379663
   + https://t.me/s/v2RayyNGvpn
   + https://t.me/s/v2Rez
@@ -8120,6 +8120,7 @@ Added IDs:
   + https://t.me/s/v2ray_configs_pool
   + https://t.me/s/v2ray_configs_pools
   + https://t.me/s/v2ray_configs_poolsTELEGRAM
+  + https://t.me/s/v2ray_confing33
   + https://t.me/s/v2ray_fa3t
   + https://t.me/s/v2ray_fark
   + https://t.me/s/v2ray_god
@@ -8240,6 +8241,7 @@ Added IDs:
   + https://t.me/s/verymad
   + https://t.me/s/vespator
   + https://t.me/s/vexo6
+  + https://t.me/s/vf3us9
   + https://t.me/s/vfast7
   + https://t.me/s/vfbh5h398f
   + https://t.me/s/vfghoo66f5
