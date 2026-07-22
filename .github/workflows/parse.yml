@@ -34,9 +34,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           mkdir -p output
-          # Добавляем все результирующие файлы (включая сжатый JSON, если он есть)
-          git add -f output/telegram_ids.txt output/parsed_configs.json.gz output/changes.txt output/metadata.json || \
-          git add -f output/telegram_ids.txt output/parsed_configs.json output/changes.txt output/metadata.json || true
+          # Добавляем все файлы из папки output (включая .json.gz)
+          git add -f output/
+          # Проверяем, есть ли изменения для коммита
           git diff --staged --quiet || git commit -m "Update Telegram IDs (auto)"
           git push
         env:
