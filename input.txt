@@ -44,5 +44,9 @@ https://raw.githubusercontent.com/Argh94/Proxy-List/refs/heads/main/Trojan.txt
 https://raw.githubusercontent.com/Argh94/Proxy-List/refs/heads/main/Hysteria2.txt
 https://raw.githubusercontent.com/Argh94/Proxy-List/refs/heads/main/All_Config.txt
 https://raw.githubusercontent.com/slxkware/Vless-list/refs/heads/main/Black%20Vless.txt
+https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/vless.txt
+https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/trojan.txt
 https://raw.githubusercontent.com/slxkware/Vless-list/refs/heads/main/White%20Vless.txt
 https://raw.githubusercontent.com/ninjastrikers/Nexus-nodes/main/configs/all.txt
+https://github.com/Delta-Kronecker/V2ray-Config/raw/refs/heads/main/config/all_configs.txt
+https://raw.githubusercontent.com/hamedcode/port-based-v2ray-configs/main/sub/ss.txt
