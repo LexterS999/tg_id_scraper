@@ -64,7 +64,7 @@ def load_links_from_url(url: str, timeout: int = 30, retries: int = 3, use_cache
     retry_strategy = Retry(
         total=retries,
         backoff_factor=1,
-        status_forcelist=[500, 502, 503, 504],
+        status_forcelist=[429, 500, 502, 503, 504],
         allowed_methods=["GET"]
     )
     adapter = HTTPAdapter(max_retries=retry_strategy)
@@ -74,14 +74,21 @@ def load_links_from_url(url: str, timeout: int = 30, retries: int = 3, use_cache
     try:
         # Check Content-Length before full download (if available)
         head_resp = _rate_limited_request(url, timeout=timeout, stream=True, method='HEAD')
+        if head_resp.status_code == 404:
+            logger.error(f"URL not found (404): {url}")
+            return []
+        if head_resp.status_code == 400:
+            logger.error(f"Bad request (400) for {url}, will attempt to download anyway")
+            # Some servers return 400 on HEAD but 200 on GET
         if head_resp.status_code == 200:
             content_length = head_resp.headers.get('Content-Length')
             if content_length and int(content_length) > config.MAX_DOWNLOAD_SIZE:
-                raise Exception(f"File too large: {content_length} bytes (max {config.MAX_DOWNLOAD_SIZE})")
-        
+                logger.warning(f"File too large: {content_length} bytes (max {config.MAX_DOWNLOAD_SIZE}) for {url}")
+                return []
+
         response = _rate_limited_request(url, timeout=timeout, stream=True)
         response.raise_for_status()
-        
+
         # Stream reading with limit
         links = []
         for i, line in enumerate(response.iter_lines(decode_unicode=True)):
@@ -91,11 +98,18 @@ def load_links_from_url(url: str, timeout: int = 30, retries: int = 3, use_cache
             line = line.strip()
             if line and not line.startswith('#'):
                 links.append(line)
-        
+
         logger.debug(f"Downloaded {len(links)} config lines from {url}")
         return links
+    except requests.HTTPError as e:
+        if e.response is not None and e.response.status_code == 404:
+            logger.error(f"URL not found (404): {url}")
+        else:
+            logger.error(f"HTTP error for {url}: {e}")
+        return []
     except requests.RequestException as e:
-        raise Exception(f"Error downloading URL {url}: {e}")
+        logger.error(f"Error downloading URL {url}: {e}")
+        return []
 
 def load_links_from_url_stream(url: str, max_lines: int = config.MAX_LINES, timeout: int = 30) -> List[str]:
     """Load only first N lines from a URL without caching (streaming)."""
