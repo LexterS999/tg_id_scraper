@@ -82,6 +82,26 @@ class Parser:
         
         link = link.strip()
         
+        # --- Обработка прямых ссылок на Telegram-каналы ---
+        if link.startswith('https://t.me/s/'):
+            channel_name = link.replace('https://t.me/s/', '').split('?')[0].split('#')[0].strip('/')
+            if channel_name and len(channel_name) >= 5:
+                if not channel_name.startswith('@'):
+                    channel_name = '@' + channel_name
+                return {
+                    'protocol': 'telegram_channel',
+                    'raw': link,
+                    'found_telegram_ids': [channel_name],
+                    'comment': None,
+                    'uuid': None,
+                    'host': None,
+                    'port': None,
+                    'params': None
+                }
+            else:
+                return None  # некорректная ссылка
+        # ----------------------------------------------------
+        
         # Validate link format
         if not is_valid_link_format(link):
             logger.debug(f"Invalid link format: {link[:50]}...")
