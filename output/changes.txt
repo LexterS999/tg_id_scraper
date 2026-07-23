@@ -1271,6 +1271,7 @@ Added IDs:
   + https://t.me/s/AMwybc11f2C7oIS6HvZivt
   + https://t.me/s/ANA_Service
   + https://t.me/s/ANTEN
+  + https://t.me/s/APPSOONER
   + https://t.me/s/APPXA
   + https://t.me/s/AR14N24b
   + https://t.me/s/ARCHIVE_ANDROID
@@ -1355,7 +1356,6 @@ Added IDs:
   + https://t.me/s/Awlix_ir
   + https://t.me/s/AzadMarz
   + https://t.me/s/AzadWeb
-  + https://t.me/s/Azadanv2ray
   + https://t.me/s/AzadiIran
   + https://t.me/s/AzarAndoozVPN
   + https://t.me/s/AzarAndoozVPNbot
@@ -1438,108 +1438,36 @@ Added IDs:
   + https://t.me/s/Club_Vpn9
   + https://t.me/s/CoNFiGLiNE
   + https://t.me/s/ComMUNaL
+  + https://t.me/s/Config
   + https://t.me/s/ConfigFast
   + https://t.me/s/ConfigFree
   + https://t.me/s/ConfigPositive
   + https://t.me/s/ConfigSup
   + https://t.me/s/ConfigTell
   + https://t.me/s/ConfigV2RayNG
-  + https://t.me/s/ConfigV2RayNG_CZ_261
+  + https://t.me/s/ConfigV2RayNG_CA_291
   + https://t.me/s/ConfigV2RayNG_DE_192
   + https://t.me/s/ConfigV2RayNG_FI_188
-  + https://t.me/s/ConfigV2RayNG_GB_409
   + https://t.me/s/ConfigV2RayNG_IT_150
-  + https://t.me/s/ConfigV2RayNG_IT_159
   + https://t.me/s/ConfigV2RayNG_IT_183
   + https://t.me/s/ConfigV2RayNG_NL_107
-  + https://t.me/s/ConfigV2RayNG_NL_271
   + https://t.me/s/ConfigV2RayNG_NL_62
-  + https://t.me/s/ConfigV2RayNG_RU_103
-  + https://t.me/s/ConfigV2RayNG_RU_17
+  + https://t.me/s/ConfigV2RayNG_NO_308
+  + https://t.me/s/ConfigV2RayNG_PL_67
+  + https://t.me/s/ConfigV2RayNG_RO_302
   + https://t.me/s/ConfigV2RayNG_RU_207
-  + https://t.me/s/ConfigV2RayNG_RU_212
-  + https://t.me/s/ConfigV2RayNG_RU_273
-  + https://t.me/s/ConfigV2RayNG_RU_32
-  + https://t.me/s/ConfigV2RayNG_SC_225
-  + https://t.me/s/ConfigV2RayNG_SC_226
-  + https://t.me/s/ConfigV2RayNG_SC_227
-  + https://t.me/s/ConfigV2RayNG_SC_228
-  + https://t.me/s/ConfigV2RayNG_SC_229
-  + https://t.me/s/ConfigV2RayNG_SC_230
-  + https://t.me/s/ConfigV2RayNG_SC_231
-  + https://t.me/s/ConfigV2RayNG_SC_332
   + https://t.me/s/ConfigV2RayNG_SC_334
-  + https://t.me/s/ConfigV2RayNG_SC_335
-  + https://t.me/s/ConfigV2RayNG_SC_337
-  + https://t.me/s/ConfigV2RayNG_SC_338
-  + https://t.me/s/ConfigV2RayNG_SC_343
-  + https://t.me/s/ConfigV2RayNG_SC_345
-  + https://t.me/s/ConfigV2RayNG_SC_346
-  + https://t.me/s/ConfigV2RayNG_SC_347
-  + https://t.me/s/ConfigV2RayNG_SC_348
-  + https://t.me/s/ConfigV2RayNG_SC_351
-  + https://t.me/s/ConfigV2RayNG_SC_354
-  + https://t.me/s/ConfigV2RayNG_SC_355
-  + https://t.me/s/ConfigV2RayNG_SC_356
-  + https://t.me/s/ConfigV2RayNG_SC_357
-  + https://t.me/s/ConfigV2RayNG_SC_359
-  + https://t.me/s/ConfigV2RayNG_SC_360
-  + https://t.me/s/ConfigV2RayNG_SC_361
-  + https://t.me/s/ConfigV2RayNG_SC_362
-  + https://t.me/s/ConfigV2RayNG_SC_363
-  + https://t.me/s/ConfigV2RayNG_SC_364
-  + https://t.me/s/ConfigV2RayNG_SC_365
-  + https://t.me/s/ConfigV2RayNG_SC_366
-  + https://t.me/s/ConfigV2RayNG_SC_367
-  + https://t.me/s/ConfigV2RayNG_SC_368
-  + https://t.me/s/ConfigV2RayNG_SC_369
-  + https://t.me/s/ConfigV2RayNG_SC_370
-  + https://t.me/s/ConfigV2RayNG_SC_371
-  + https://t.me/s/ConfigV2RayNG_SC_372
-  + https://t.me/s/ConfigV2RayNG_SC_373
-  + https://t.me/s/ConfigV2RayNG_SC_374
-  + https://t.me/s/ConfigV2RayNG_SC_375
-  + https://t.me/s/ConfigV2RayNG_SC_379
-  + https://t.me/s/ConfigV2RayNG_SC_380
-  + https://t.me/s/ConfigV2RayNG_SC_381
-  + https://t.me/s/ConfigV2RayNG_SC_383
-  + https://t.me/s/ConfigV2RayNG_SC_385
-  + https://t.me/s/ConfigV2RayNG_SC_386
-  + https://t.me/s/ConfigV2RayNG_SC_387
-  + https://t.me/s/ConfigV2RayNG_SC_388
-  + https://t.me/s/ConfigV2RayNG_SC_389
-  + https://t.me/s/ConfigV2RayNG_SC_391
-  + https://t.me/s/ConfigV2RayNG_SC_392
-  + https://t.me/s/ConfigV2RayNG_SC_394
-  + https://t.me/s/ConfigV2RayNG_SC_395
-  + https://t.me/s/ConfigV2RayNG_SC_397
-  + https://t.me/s/ConfigV2RayNG_SC_398
-  + https://t.me/s/ConfigV2RayNG_SC_399
-  + https://t.me/s/ConfigV2RayNG_SC_401
-  + https://t.me/s/ConfigV2RayNG_SC_403
-  + https://t.me/s/ConfigV2RayNG_SC_405
-  + https://t.me/s/ConfigV2RayNG_SC_406
-  + https://t.me/s/ConfigV2RayNG_SC_408
-  + https://t.me/s/ConfigV2RayNG_SC_411
-  + https://t.me/s/ConfigV2RayNG_SC_412
-  + https://t.me/s/ConfigV2RayNG_SC_414
-  + https://t.me/s/ConfigV2RayNG_SC_415
-  + https://t.me/s/ConfigV2RayNG_SC_416
-  + https://t.me/s/ConfigV2RayNG_SC_417
-  + https://t.me/s/ConfigV2RayNG_SC_418
-  + https://t.me/s/ConfigV2RayNG_SC_419
-  + https://t.me/s/ConfigV2RayNG_SC_420
-  + https://t.me/s/ConfigV2RayNG_SC_442
-  + https://t.me/s/ConfigV2RayNG_SC_69
-  + https://t.me/s/ConfigV2RayNG_SC_70
-  + https://t.me/s/ConfigV2RayNG_SC_71
-  + https://t.me/s/ConfigV2RayNG_SC_72
-  + https://t.me/s/ConfigV2RayNG_SC_81
-  + https://t.me/s/ConfigV2RayNG_SC_85
-  + https://t.me/s/ConfigV2RayNG_SC_91
-  + https://t.me/s/ConfigV2RayNG_SC_95
-  + https://t.me/s/ConfigV2RayNG_SC_96
-  + https://t.me/s/ConfigV2RayNG_TR_223
+  + https://t.me/s/ConfigV2RayNG_SC_382
+  + https://t.me/s/ConfigV2RayNG_SC_390
+  + https://t.me/s/ConfigV2RayNG_SC_393
+  + https://t.me/s/ConfigV2RayNG_SC_400
+  + https://t.me/s/ConfigV2RayNG_SC_402
+  + https://t.me/s/ConfigV2RayNG_SC_90
+  + https://t.me/s/ConfigV2RayNG_SE_266
+  + https://t.me/s/ConfigV2RayNG_US_191
+  + https://t.me/s/ConfigV2RayNG_US_259
+  + https://t.me/s/ConfigV2RayNG_US_316
+  + https://t.me/s/ConfigV2RayNG_US_317
   + https://t.me/s/ConfigV2RayNG_US_340
   + https://t.me/s/ConfigV2RayNG_US_341
   + https://t.me/s/ConfigV2rayForFree
@@ -1835,7 +1763,6 @@ Added IDs:
   + https://t.me/s/Line2
   + https://t.me/s/Linkvws
   + https://t.me/s/Ln2ray
-  + https://t.me/s/LoRd_uL4mo
   + https://t.me/s/Loadbalance
   + https://t.me/s/Lockey_VPN
   + https://t.me/s/Lockey_Vpn
@@ -1849,7 +1776,6 @@ Added IDs:
   + https://t.me/s/MACONNECTT_Netherlands
   + https://t.me/s/MANAgeR
   + https://t.me/s/MARAMBASHI
-  + https://t.me/s/MARAMBASHITELGRAM
   + https://t.me/s/MARAMBASHI_MARAMBASHI
   + https://t.me/s/MARAMBASHI_MARAMBASHI_MARAMBASHI
   + https://t.me/s/MAZNET
@@ -2460,7 +2386,6 @@ Added IDs:
   + https://t.me/s/VpnStorm
   + https://t.me/s/Vpn_Mafia
   + https://t.me/s/Vpn_Mikey
-  + https://t.me/s/Vpn_Tehran
   + https://t.me/s/Vpn_V2rayNG_gap
   + https://t.me/s/Vpnbigbang99
   + https://t.me/s/Vpnv2rayspeed
@@ -2771,6 +2696,7 @@ Added IDs:
   + https://t.me/s/aneta
   + https://t.me/s/ange1Vpn
   + https://t.me/s/angelina
+  + https://t.me/s/animall
   + https://t.me/s/anipanel
   + https://t.me/s/anix_V2ray
   + https://t.me/s/anix_v2ray
@@ -3658,7 +3584,6 @@ Added IDs:
   + https://t.me/s/cyprushotelinfo
   + https://t.me/s/cyylr
   + https://t.me/s/cz188
-  + https://t.me/s/cze01
   + https://t.me/s/czech
   + https://t.me/s/czechia
   + https://t.me/s/czre1
@@ -3837,6 +3762,7 @@ Added IDs:
   + https://t.me/s/discord
   + https://t.me/s/discord1
   + https://t.me/s/discordapp
+  + https://t.me/s/discrete
   + https://t.me/s/distinct
   + https://t.me/s/divar
   + https://t.me/s/diverse
@@ -3872,6 +3798,7 @@ Added IDs:
   + https://t.me/s/dokqjxa0
   + https://t.me/s/domain2025
   + https://t.me/s/dominant
+  + https://t.me/s/donad_
   + https://t.me/s/donad_vpn
   + https://t.me/s/donald
   + https://t.me/s/donald_vpn
@@ -5695,6 +5622,7 @@ Added IDs:
   + https://t.me/s/maxb20
   + https://t.me/s/maxb23
   + https://t.me/s/maxb30
+  + https://t.me/s/maximum
   + https://t.me/s/maxmind110933038436654075
   + https://t.me/s/maxmind246863087934244795
   + https://t.me/s/maxmind317122749673684030
@@ -5738,7 +5666,6 @@ Added IDs:
   + https://t.me/s/mehdi9
   + https://t.me/s/mehdy
   + https://t.me/s/mehrad
-  + https://t.me/s/mehrisaboran
   + https://t.me/s/mehrosaboran
   + https://t.me/s/mehrshad2
   + https://t.me/s/mehrshad3
@@ -5770,7 +5697,6 @@ Added IDs:
   + https://t.me/s/melinet2
   + https://t.me/s/melinet3
   + https://t.me/s/melinet4
-  + https://t.me/s/melinet5
   + https://t.me/s/meliplus
   + https://t.me/s/meliproxyy
   + https://t.me/s/melli
@@ -6039,6 +5965,7 @@ Added IDs:
   + https://t.me/s/nebulvpn
   + https://t.me/s/necrolyte
   + https://t.me/s/nedreal
+  + https://t.me/s/needed
   + https://t.me/s/neelavelicham
   + https://t.me/s/negin
   + https://t.me/s/nekopingbot
@@ -6550,6 +6477,7 @@ Added IDs:
   + https://t.me/s/portly
   + https://t.me/s/porttt4
   + https://t.me/s/poshaktat
+  + https://t.me/s/positive
   + https://t.me/s/possible
   + https://t.me/s/postac
   + https://t.me/s/potyjnovpn
@@ -8354,6 +8282,7 @@ Added IDs:
   + https://t.me/s/v2raymci
   + https://t.me/s/v2raymhcn
   + https://t.me/s/v2raymizban
+  + https://t.me/s/v2rayn_server
   + https://t.me/s/v2rayng12023
   + https://t.me/s/v2rayng14
   + https://t.me/s/v2rayng3
@@ -10255,6 +10184,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/Amsterdam1
   - https://t.me/s/https://t.me/s/AmyraxVPN
   - https://t.me/s/https://t.me/s/AnGuS_VPN
+  - https://t.me/s/https://t.me/s/Animall
   - https://t.me/s/https://t.me/s/Anix_V2ray
   - https://t.me/s/https://t.me/s/Anony
   - https://t.me/s/https://t.me/s/Anten
@@ -10376,13 +10306,110 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/Club_Vpn9
   - https://t.me/s/https://t.me/s/CoNFiGLiNE
   - https://t.me/s/https://t.me/s/ComMUNaL
-  - https://t.me/s/https://t.me/s/Config
   - https://t.me/s/https://t.me/s/ConfigFast
   - https://t.me/s/https://t.me/s/ConfigFree
   - https://t.me/s/https://t.me/s/ConfigPositive
   - https://t.me/s/https://t.me/s/ConfigSup
   - https://t.me/s/https://t.me/s/ConfigTell
   - https://t.me/s/https://t.me/s/ConfigV2RayNG
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_CZ_261
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_DE_192
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_FI_188
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_GB_409
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_IT_150
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_IT_159
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_IT_183
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_NL_107
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_NL_271
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_NL_62
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_RU_103
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_RU_17
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_RU_207
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_RU_212
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_RU_273
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_RU_32
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_225
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_226
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_227
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_228
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_229
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_230
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_231
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_332
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_334
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_335
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_337
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_338
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_343
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_345
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_346
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_347
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_348
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_351
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_354
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_355
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_356
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_357
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_359
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_360
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_361
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_362
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_363
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_364
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_365
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_366
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_367
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_368
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_369
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_370
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_371
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_372
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_373
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_374
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_375
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_379
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_380
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_381
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_383
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_385
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_386
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_387
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_388
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_389
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_391
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_392
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_394
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_395
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_397
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_398
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_399
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_401
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_403
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_405
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_406
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_408
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_411
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_412
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_414
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_415
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_416
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_417
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_418
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_419
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_420
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_442
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_69
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_70
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_71
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_72
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_81
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_85
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_91
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_95
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_SC_96
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_TR_223
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_US_340
+  - https://t.me/s/https://t.me/s/ConfigV2RayNG_US_341
   - https://t.me/s/https://t.me/s/ConfigV2rayForFree
   - https://t.me/s/https://t.me/s/Config_On
   - https://t.me/s/https://t.me/s/Config_Rayegan
@@ -10598,7 +10625,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/Hormozv
   - https://t.me/s/https://t.me/s/Hormozvp
   - https://t.me/s/https://t.me/s/HosseinStore_Za
-  - https://t.me/s/https://t.me/s/HpV2Ray_official
   - https://t.me/s/https://t.me/s/HqV2Ray
   - https://t.me/s/https://t.me/s/HqV2RayBOT
   - https://t.me/s/https://t.me/s/HqV2RayNG
@@ -10643,7 +10669,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/JDHSHSHHJSHHDHJSHHSHHHSSHSH
   - https://t.me/s/https://t.me/s/JKVPN
   - https://t.me/s/https://t.me/s/JOKERRVPN
-  - https://t.me/s/https://t.me/s/JOKERRVPNCopy
   - https://t.me/s/https://t.me/s/JOKERRVPNJoinBadeChannel
   - https://t.me/s/https://t.me/s/JOKERRVPN_JOKERRVPN_JOKERRVPN
   - https://t.me/s/https://t.me/s/JOKERRVPN_Join_Bade_Channel
@@ -10678,6 +10703,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/Line2
   - https://t.me/s/https://t.me/s/Linkvws
   - https://t.me/s/https://t.me/s/Ln2ray
+  - https://t.me/s/https://t.me/s/LoRd_uL4mo
   - https://t.me/s/https://t.me/s/Loadbalance
   - https://t.me/s/https://t.me/s/Lockey_VPN
   - https://t.me/s/https://t.me/s/Lockey_Vpn
@@ -11730,6 +11756,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/ashburn
   - https://t.me/s/https://t.me/s/ashcan
   - https://t.me/s/https://t.me/s/ashley
+  - https://t.me/s/https://t.me/s/ashpro
   - https://t.me/s/https://t.me/s/ashton
   - https://t.me/s/https://t.me/s/asia1
   - https://t.me/s/https://t.me/s/asia2
@@ -13288,6 +13315,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/ftp55
   - https://t.me/s/https://t.me/s/ftvpn
   - https://t.me/s/https://t.me/s/fuck1
+  - https://t.me/s/https://t.me/s/fuckfangbinxing
   - https://t.me/s/https://t.me/s/fuckrc
   - https://t.me/s/https://t.me/s/fuckxiaofenhong
   - https://t.me/s/https://t.me/s/fuckxijinping
@@ -13339,6 +13367,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/gcore
   - https://t.me/s/https://t.me/s/gcpxjp
   - https://t.me/s/https://t.me/s/gcways
+  - https://t.me/s/https://t.me/s/gdyddx500
   - https://t.me/s/https://t.me/s/ge144173
   - https://t.me/s/https://t.me/s/ge2ir
   - https://t.me/s/https://t.me/s/ge2vip
@@ -13732,6 +13761,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/hypervisor
   - https://t.me/s/https://t.me/s/hypervpns
   - https://t.me/s/https://t.me/s/i10VPN
+  - https://t.me/s/https://t.me/s/i2c3h4a5c6i
   - https://t.me/s/https://t.me/s/i7bor
   - https://t.me/s/https://t.me/s/i9club
   - https://t.me/s/https://t.me/s/iCloudYshop
@@ -14141,6 +14171,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/jxi8n
   - https://t.me/s/https://t.me/s/jyvlryz
   - https://t.me/s/https://t.me/s/jzy66222
+  - https://t.me/s/https://t.me/s/k35757
   - https://t.me/s/https://t.me/s/k51xf
   - https://t.me/s/https://t.me/s/k9l29
   - https://t.me/s/https://t.me/s/ka1781041r
@@ -14802,6 +14833,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/music
   - https://t.me/s/https://t.me/s/music1000
   - https://t.me/s/https://t.me/s/musical
+  - https://t.me/s/https://t.me/s/musiclovers85
   - https://t.me/s/https://t.me/s/musketries
   - https://t.me/s/https://t.me/s/mutual
   - https://t.me/s/https://t.me/s/mww1ek4ipewzn
@@ -15625,6 +15657,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/rahbar
   - https://t.me/s/https://t.me/s/raigan
   - https://t.me/s/https://t.me/s/railway
+  - https://t.me/s/https://t.me/s/raiv2mmr
   - https://t.me/s/https://t.me/s/raman
   - https://t.me/s/https://t.me/s/ramfa
   - https://t.me/s/https://t.me/s/ramfaseo
@@ -16621,7 +16654,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/sun49
   - https://t.me/s/https://t.me/s/sunder
   - https://t.me/s/https://t.me/s/sunfield
-  - https://t.me/s/https://t.me/s/sunflowerplato
   - https://t.me/s/https://t.me/s/sunnaquran05
   - https://t.me/s/https://t.me/s/sunup
   - https://t.me/s/https://t.me/s/suolar
@@ -17019,6 +17051,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/ultra
   - https://t.me/s/https://t.me/s/unamecf
   - https://t.me/s/https://t.me/s/unbiased
+  - https://t.me/s/https://t.me/s/unblocked_ir
   - https://t.me/s/https://t.me/s/undef
   - https://t.me/s/https://t.me/s/unique
   - https://t.me/s/https://t.me/s/united
@@ -17109,7 +17142,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/uuuuuuuuuu
   - https://t.me/s/https://t.me/s/uvgl4cjd0475
   - https://t.me/s/https://t.me/s/v1bsy2b9q5
-  - https://t.me/s/https://t.me/s/v1in2
   - https://t.me/s/https://t.me/s/v2202509298505379663
   - https://t.me/s/https://t.me/s/v2RayyNGvpn
   - https://t.me/s/https://t.me/s/v2Rez
@@ -17190,7 +17222,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/v2raymci
   - https://t.me/s/https://t.me/s/v2raymhcn
   - https://t.me/s/https://t.me/s/v2raymizban
-  - https://t.me/s/https://t.me/s/v2rayn_server
   - https://t.me/s/https://t.me/s/v2rayng12023
   - https://t.me/s/https://t.me/s/v2rayng14
   - https://t.me/s/https://t.me/s/v2rayng3
@@ -17281,7 +17312,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/verymad
   - https://t.me/s/https://t.me/s/vespator
   - https://t.me/s/https://t.me/s/vexo6
-  - https://t.me/s/https://t.me/s/vf3us9
   - https://t.me/s/https://t.me/s/vfast7
   - https://t.me/s/https://t.me/s/vfbh5h398f
   - https://t.me/s/https://t.me/s/vfghoo66f5
