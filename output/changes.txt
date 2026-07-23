@@ -1316,6 +1316,7 @@ Added IDs:
   + https://t.me/s/Amsterdam1
   + https://t.me/s/AmyraxVPN
   + https://t.me/s/AnGuS_VPN
+  + https://t.me/s/Animall
   + https://t.me/s/Anix_V2ray
   + https://t.me/s/Anony
   + https://t.me/s/Anten
@@ -1437,13 +1438,110 @@ Added IDs:
   + https://t.me/s/Club_Vpn9
   + https://t.me/s/CoNFiGLiNE
   + https://t.me/s/ComMUNaL
-  + https://t.me/s/Config
   + https://t.me/s/ConfigFast
   + https://t.me/s/ConfigFree
   + https://t.me/s/ConfigPositive
   + https://t.me/s/ConfigSup
   + https://t.me/s/ConfigTell
   + https://t.me/s/ConfigV2RayNG
+  + https://t.me/s/ConfigV2RayNG_CZ_261
+  + https://t.me/s/ConfigV2RayNG_DE_192
+  + https://t.me/s/ConfigV2RayNG_FI_188
+  + https://t.me/s/ConfigV2RayNG_GB_409
+  + https://t.me/s/ConfigV2RayNG_IT_150
+  + https://t.me/s/ConfigV2RayNG_IT_159
+  + https://t.me/s/ConfigV2RayNG_IT_183
+  + https://t.me/s/ConfigV2RayNG_NL_107
+  + https://t.me/s/ConfigV2RayNG_NL_271
+  + https://t.me/s/ConfigV2RayNG_NL_62
+  + https://t.me/s/ConfigV2RayNG_RU_103
+  + https://t.me/s/ConfigV2RayNG_RU_17
+  + https://t.me/s/ConfigV2RayNG_RU_207
+  + https://t.me/s/ConfigV2RayNG_RU_212
+  + https://t.me/s/ConfigV2RayNG_RU_273
+  + https://t.me/s/ConfigV2RayNG_RU_32
+  + https://t.me/s/ConfigV2RayNG_SC_225
+  + https://t.me/s/ConfigV2RayNG_SC_226
+  + https://t.me/s/ConfigV2RayNG_SC_227
+  + https://t.me/s/ConfigV2RayNG_SC_228
+  + https://t.me/s/ConfigV2RayNG_SC_229
+  + https://t.me/s/ConfigV2RayNG_SC_230
+  + https://t.me/s/ConfigV2RayNG_SC_231
+  + https://t.me/s/ConfigV2RayNG_SC_332
+  + https://t.me/s/ConfigV2RayNG_SC_334
+  + https://t.me/s/ConfigV2RayNG_SC_335
+  + https://t.me/s/ConfigV2RayNG_SC_337
+  + https://t.me/s/ConfigV2RayNG_SC_338
+  + https://t.me/s/ConfigV2RayNG_SC_343
+  + https://t.me/s/ConfigV2RayNG_SC_345
+  + https://t.me/s/ConfigV2RayNG_SC_346
+  + https://t.me/s/ConfigV2RayNG_SC_347
+  + https://t.me/s/ConfigV2RayNG_SC_348
+  + https://t.me/s/ConfigV2RayNG_SC_351
+  + https://t.me/s/ConfigV2RayNG_SC_354
+  + https://t.me/s/ConfigV2RayNG_SC_355
+  + https://t.me/s/ConfigV2RayNG_SC_356
+  + https://t.me/s/ConfigV2RayNG_SC_357
+  + https://t.me/s/ConfigV2RayNG_SC_359
+  + https://t.me/s/ConfigV2RayNG_SC_360
+  + https://t.me/s/ConfigV2RayNG_SC_361
+  + https://t.me/s/ConfigV2RayNG_SC_362
+  + https://t.me/s/ConfigV2RayNG_SC_363
+  + https://t.me/s/ConfigV2RayNG_SC_364
+  + https://t.me/s/ConfigV2RayNG_SC_365
+  + https://t.me/s/ConfigV2RayNG_SC_366
+  + https://t.me/s/ConfigV2RayNG_SC_367
+  + https://t.me/s/ConfigV2RayNG_SC_368
+  + https://t.me/s/ConfigV2RayNG_SC_369
+  + https://t.me/s/ConfigV2RayNG_SC_370
+  + https://t.me/s/ConfigV2RayNG_SC_371
+  + https://t.me/s/ConfigV2RayNG_SC_372
+  + https://t.me/s/ConfigV2RayNG_SC_373
+  + https://t.me/s/ConfigV2RayNG_SC_374
+  + https://t.me/s/ConfigV2RayNG_SC_375
+  + https://t.me/s/ConfigV2RayNG_SC_379
+  + https://t.me/s/ConfigV2RayNG_SC_380
+  + https://t.me/s/ConfigV2RayNG_SC_381
+  + https://t.me/s/ConfigV2RayNG_SC_383
+  + https://t.me/s/ConfigV2RayNG_SC_385
+  + https://t.me/s/ConfigV2RayNG_SC_386
+  + https://t.me/s/ConfigV2RayNG_SC_387
+  + https://t.me/s/ConfigV2RayNG_SC_388
+  + https://t.me/s/ConfigV2RayNG_SC_389
+  + https://t.me/s/ConfigV2RayNG_SC_391
+  + https://t.me/s/ConfigV2RayNG_SC_392
+  + https://t.me/s/ConfigV2RayNG_SC_394
+  + https://t.me/s/ConfigV2RayNG_SC_395
+  + https://t.me/s/ConfigV2RayNG_SC_397
+  + https://t.me/s/ConfigV2RayNG_SC_398
+  + https://t.me/s/ConfigV2RayNG_SC_399
+  + https://t.me/s/ConfigV2RayNG_SC_401
+  + https://t.me/s/ConfigV2RayNG_SC_403
+  + https://t.me/s/ConfigV2RayNG_SC_405
+  + https://t.me/s/ConfigV2RayNG_SC_406
+  + https://t.me/s/ConfigV2RayNG_SC_408
+  + https://t.me/s/ConfigV2RayNG_SC_411
+  + https://t.me/s/ConfigV2RayNG_SC_412
+  + https://t.me/s/ConfigV2RayNG_SC_414
+  + https://t.me/s/ConfigV2RayNG_SC_415
+  + https://t.me/s/ConfigV2RayNG_SC_416
+  + https://t.me/s/ConfigV2RayNG_SC_417
+  + https://t.me/s/ConfigV2RayNG_SC_418
+  + https://t.me/s/ConfigV2RayNG_SC_419
+  + https://t.me/s/ConfigV2RayNG_SC_420
+  + https://t.me/s/ConfigV2RayNG_SC_442
+  + https://t.me/s/ConfigV2RayNG_SC_69
+  + https://t.me/s/ConfigV2RayNG_SC_70
+  + https://t.me/s/ConfigV2RayNG_SC_71
+  + https://t.me/s/ConfigV2RayNG_SC_72
+  + https://t.me/s/ConfigV2RayNG_SC_81
+  + https://t.me/s/ConfigV2RayNG_SC_85
+  + https://t.me/s/ConfigV2RayNG_SC_91
+  + https://t.me/s/ConfigV2RayNG_SC_95
+  + https://t.me/s/ConfigV2RayNG_SC_96
+  + https://t.me/s/ConfigV2RayNG_TR_223
+  + https://t.me/s/ConfigV2RayNG_US_340
+  + https://t.me/s/ConfigV2RayNG_US_341
   + https://t.me/s/ConfigV2rayForFree
   + https://t.me/s/Config_On
   + https://t.me/s/Config_Rayegan
@@ -1659,7 +1757,6 @@ Added IDs:
   + https://t.me/s/Hormozv
   + https://t.me/s/Hormozvp
   + https://t.me/s/HosseinStore_Za
-  + https://t.me/s/HpV2Ray_official
   + https://t.me/s/HqV2Ray
   + https://t.me/s/HqV2RayBOT
   + https://t.me/s/HqV2RayNG
@@ -1704,7 +1801,6 @@ Added IDs:
   + https://t.me/s/JDHSHSHHJSHHDHJSHHSHHHSSHSH
   + https://t.me/s/JKVPN
   + https://t.me/s/JOKERRVPN
-  + https://t.me/s/JOKERRVPNCopy
   + https://t.me/s/JOKERRVPNJoinBadeChannel
   + https://t.me/s/JOKERRVPN_JOKERRVPN_JOKERRVPN
   + https://t.me/s/JOKERRVPN_Join_Bade_Channel
@@ -1739,6 +1835,7 @@ Added IDs:
   + https://t.me/s/Line2
   + https://t.me/s/Linkvws
   + https://t.me/s/Ln2ray
+  + https://t.me/s/LoRd_uL4mo
   + https://t.me/s/Loadbalance
   + https://t.me/s/Lockey_VPN
   + https://t.me/s/Lockey_Vpn
@@ -2791,6 +2888,7 @@ Added IDs:
   + https://t.me/s/ashburn
   + https://t.me/s/ashcan
   + https://t.me/s/ashley
+  + https://t.me/s/ashpro
   + https://t.me/s/ashton
   + https://t.me/s/asia1
   + https://t.me/s/asia2
@@ -4349,6 +4447,7 @@ Added IDs:
   + https://t.me/s/ftp55
   + https://t.me/s/ftvpn
   + https://t.me/s/fuck1
+  + https://t.me/s/fuckfangbinxing
   + https://t.me/s/fuckrc
   + https://t.me/s/fuckxiaofenhong
   + https://t.me/s/fuckxijinping
@@ -4400,6 +4499,7 @@ Added IDs:
   + https://t.me/s/gcore
   + https://t.me/s/gcpxjp
   + https://t.me/s/gcways
+  + https://t.me/s/gdyddx500
   + https://t.me/s/ge144173
   + https://t.me/s/ge2ir
   + https://t.me/s/ge2vip
@@ -4793,6 +4893,7 @@ Added IDs:
   + https://t.me/s/hypervisor
   + https://t.me/s/hypervpns
   + https://t.me/s/i10VPN
+  + https://t.me/s/i2c3h4a5c6i
   + https://t.me/s/i7bor
   + https://t.me/s/i9club
   + https://t.me/s/iCloudYshop
@@ -5202,6 +5303,7 @@ Added IDs:
   + https://t.me/s/jxi8n
   + https://t.me/s/jyvlryz
   + https://t.me/s/jzy66222
+  + https://t.me/s/k35757
   + https://t.me/s/k51xf
   + https://t.me/s/k9l29
   + https://t.me/s/ka1781041r
@@ -5863,6 +5965,7 @@ Added IDs:
   + https://t.me/s/music
   + https://t.me/s/music1000
   + https://t.me/s/musical
+  + https://t.me/s/musiclovers85
   + https://t.me/s/musketries
   + https://t.me/s/mutual
   + https://t.me/s/mww1ek4ipewzn
@@ -6686,6 +6789,7 @@ Added IDs:
   + https://t.me/s/rahbar
   + https://t.me/s/raigan
   + https://t.me/s/railway
+  + https://t.me/s/raiv2mmr
   + https://t.me/s/raman
   + https://t.me/s/ramfa
   + https://t.me/s/ramfaseo
@@ -7682,7 +7786,6 @@ Added IDs:
   + https://t.me/s/sun49
   + https://t.me/s/sunder
   + https://t.me/s/sunfield
-  + https://t.me/s/sunflowerplato
   + https://t.me/s/sunnaquran05
   + https://t.me/s/sunup
   + https://t.me/s/suolar
@@ -8080,6 +8183,7 @@ Added IDs:
   + https://t.me/s/ultra
   + https://t.me/s/unamecf
   + https://t.me/s/unbiased
+  + https://t.me/s/unblocked_ir
   + https://t.me/s/undef
   + https://t.me/s/unique
   + https://t.me/s/united
@@ -8170,7 +8274,6 @@ Added IDs:
   + https://t.me/s/uuuuuuuuuu
   + https://t.me/s/uvgl4cjd0475
   + https://t.me/s/v1bsy2b9q5
-  + https://t.me/s/v1in2
   + https://t.me/s/v2202509298505379663
   + https://t.me/s/v2RayyNGvpn
   + https://t.me/s/v2Rez
@@ -8251,7 +8354,6 @@ Added IDs:
   + https://t.me/s/v2raymci
   + https://t.me/s/v2raymhcn
   + https://t.me/s/v2raymizban
-  + https://t.me/s/v2rayn_server
   + https://t.me/s/v2rayng12023
   + https://t.me/s/v2rayng14
   + https://t.me/s/v2rayng3
@@ -8342,7 +8444,6 @@ Added IDs:
   + https://t.me/s/verymad
   + https://t.me/s/vespator
   + https://t.me/s/vexo6
-  + https://t.me/s/vf3us9
   + https://t.me/s/vfast7
   + https://t.me/s/vfbh5h398f
   + https://t.me/s/vfghoo66f5
@@ -10129,6 +10230,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/AZadnet1
   - https://t.me/s/https://t.me/s/Abmive
   - https://t.me/s/https://t.me/s/Academi_vpn
+  - https://t.me/s/https://t.me/s/Adamak_Von
   - https://t.me/s/https://t.me/s/Adamak_vpn
   - https://t.me/s/https://t.me/s/AfV2ray
   - https://t.me/s/https://t.me/s/Afv2ray
@@ -10173,7 +10275,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/Arfilter
   - https://t.me/s/https://t.me/s/Argo_VPN1
   - https://t.me/s/https://t.me/s/Arshiacomplus
-  - https://t.me/s/https://t.me/s/Arshiavpn
   - https://t.me/s/https://t.me/s/Arshiavpn12
   - https://t.me/s/https://t.me/s/Arshiavpnred_bot
   - https://t.me/s/https://t.me/s/Artemis
@@ -10444,7 +10545,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/FruItfUl
   - https://t.me/s/https://t.me/s/FsV2ray
   - https://t.me/s/https://t.me/s/Fservice
-  - https://t.me/s/https://t.me/s/FuseVPN
   - https://t.me/s/https://t.me/s/Fv2ray
   - https://t.me/s/https://t.me/s/G0dv2ray
   - https://t.me/s/https://t.me/s/GHALAGYANN
@@ -10455,6 +10555,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/GRtsGSJ
   - https://t.me/s/https://t.me/s/GRumpY
   - https://t.me/s/https://t.me/s/Gap_Ip
+  - https://t.me/s/https://t.me/s/Generalconfiig
   - https://t.me/s/https://t.me/s/GerGame2
   - https://t.me/s/https://t.me/s/Gerlight
   - https://t.me/s/https://t.me/s/German
@@ -10482,7 +10583,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/HELIX_Servers
   - https://t.me/s/https://t.me/s/HKNTT1
   - https://t.me/s/https://t.me/s/HSHSHSJSJJSHSJJSJJEJJSHE
-  - https://t.me/s/https://t.me/s/HajmVPN_Config
   - https://t.me/s/https://t.me/s/Hatunnel_vpn
   - https://t.me/s/https://t.me/s/Hddify
   - https://t.me/s/https://t.me/s/Helix_Servers
@@ -10518,7 +10618,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/IRANTUNNEL
   - https://t.me/s/https://t.me/s/IRAN_MEHR_VPN_IRAN_MEHR_VPN_IRAN
   - https://t.me/s/https://t.me/s/IRAN_V2RAY1
-  - https://t.me/s/https://t.me/s/IRAN_V2RAY1wss9500
   - https://t.me/s/https://t.me/s/IRAN_VPN01
   - https://t.me/s/https://t.me/s/IRAN_access
   - https://t.me/s/https://t.me/s/IRN_VPN
@@ -10534,7 +10633,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/InterNet_Nor
   - https://t.me/s/https://t.me/s/Ipin1
   - https://t.me/s/https://t.me/s/Iran_V2ray1
-  - https://t.me/s/https://t.me/s/Iran_v2ray1
   - https://t.me/s/https://t.me/s/Irancell
   - https://t.me/s/https://t.me/s/Irancloud
   - https://t.me/s/https://t.me/s/IranianMinds
@@ -10545,6 +10643,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/JDHSHSHHJSHHDHJSHHSHHHSSHSH
   - https://t.me/s/https://t.me/s/JKVPN
   - https://t.me/s/https://t.me/s/JOKERRVPN
+  - https://t.me/s/https://t.me/s/JOKERRVPNCopy
   - https://t.me/s/https://t.me/s/JOKERRVPNJoinBadeChannel
   - https://t.me/s/https://t.me/s/JOKERRVPN_JOKERRVPN_JOKERRVPN
   - https://t.me/s/https://t.me/s/JOKERRVPN_Join_Bade_Channel
@@ -10587,10 +10686,12 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/LowiK_Live
   - https://t.me/s/https://t.me/s/M3HDIO1
   - https://t.me/s/https://t.me/s/M4DVPN
+  - https://t.me/s/https://t.me/s/M4Dvpn
   - https://t.me/s/https://t.me/s/M4d_VPN
   - https://t.me/s/https://t.me/s/MACONNECTT_Netherlands
   - https://t.me/s/https://t.me/s/MANAgeR
   - https://t.me/s/https://t.me/s/MARAMBASHI
+  - https://t.me/s/https://t.me/s/MARAMBASHITELGRAM
   - https://t.me/s/https://t.me/s/MARAMBASHI_MARAMBASHI
   - https://t.me/s/https://t.me/s/MARAMBASHI_MARAMBASHI_MARAMBASHI
   - https://t.me/s/https://t.me/s/MAZNET
@@ -10614,6 +10715,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/MTPV2ray
   - https://t.me/s/https://t.me/s/MT_TEAM_IRAN
   - https://t.me/s/https://t.me/s/MXGRID
+  - https://t.me/s/https://t.me/s/MXGRiD
   - https://t.me/s/https://t.me/s/MY_ARCHIVE69
   - https://t.me/s/https://t.me/s/M_vipv2ray
   - https://t.me/s/https://t.me/s/MaHDiSeRVeR
@@ -10755,7 +10857,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/PLANB_PROXY
   - https://t.me/s/https://t.me/s/POLPROXY
   - https://t.me/s/https://t.me/s/POlIKKkZ
-  - https://t.me/s/https://t.me/s/PQV2RAY
   - https://t.me/s/https://t.me/s/PRActiCaL
   - https://t.me/s/https://t.me/s/PROXY
   - https://t.me/s/https://t.me/s/PROXYSTORE11
@@ -10794,7 +10895,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/ProxyMY2
   - https://t.me/s/https://t.me/s/ProxyMY2Telegramjoin
   - https://t.me/s/https://t.me/s/ProxyMtAlpha
-  - https://t.me/s/https://t.me/s/ProxyPJ
   - https://t.me/s/https://t.me/s/ProxySnipe
   - https://t.me/s/https://t.me/s/ProxySnipeKST6LJ
   - https://t.me/s/https://t.me/s/ProxySnipeMH5RYF
@@ -11024,6 +11124,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/UCIRANIR
   - https://t.me/s/https://t.me/s/U_CONFINGVPN
   - https://t.me/s/https://t.me/s/UnNurmal
+  - https://t.me/s/https://t.me/s/Unblocked_ir
   - https://t.me/s/https://t.me/s/Unblocked_ir_Unblocked_ir_Unbloc
   - https://t.me/s/https://t.me/s/UnlimitedDev
   - https://t.me/s/https://t.me/s/Update
@@ -11049,6 +11150,8 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/V2RAY_SPATIAL
   - https://t.me/s/https://t.me/s/V2RAY_STRING
   - https://t.me/s/https://t.me/s/V2RAY_VMES
+  - https://t.me/s/https://t.me/s/V2RAY_VPN_IR
+  - https://t.me/s/https://t.me/s/V2RET
   - https://t.me/s/https://t.me/s/V2RIRAN
   - https://t.me/s/https://t.me/s/V2RRAY_NG
   - https://t.me/s/https://t.me/s/V2RayCactus
@@ -11105,6 +11208,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/V2ray_Alph
   - https://t.me/s/https://t.me/s/V2ray_Alpha
   - https://t.me/s/https://t.me/s/V2ray_Collector
+  - https://t.me/s/https://t.me/s/V2ray_Custom
   - https://t.me/s/https://t.me/s/V2ray_God
   - https://t.me/s/https://t.me/s/V2ray_alpha
   - https://t.me/s/https://t.me/s/V2ray_alpha_vip
@@ -11122,7 +11226,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/V2rayngninja
   - https://t.me/s/https://t.me/s/V2raytopng
   - https://t.me/s/https://t.me/s/V2rayyNGvpn
-  - https://t.me/s/https://t.me/s/V2riraN
   - https://t.me/s/https://t.me/s/V2sezar
   - https://t.me/s/https://t.me/s/V2sparrow
   - https://t.me/s/https://t.me/s/V2ynpv
@@ -11150,7 +11253,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/VPNOD
   - https://t.me/s/https://t.me/s/VPNPacket
   - https://t.me/s/https://t.me/s/VPNPlus100
-  - https://t.me/s/https://t.me/s/VPNSupportGroup
   - https://t.me/s/https://t.me/s/VPNTV20
   - https://t.me/s/https://t.me/s/VPN_KING_V2RAY
   - https://t.me/s/https://t.me/s/VPN_KING_V2RAYTel
@@ -11391,6 +11493,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/aliquran24
   - https://t.me/s/https://t.me/s/alireza
   - https://t.me/s/https://t.me/s/alisa
+  - https://t.me/s/https://t.me/s/alist
   - https://t.me/s/https://t.me/s/alitajiii
   - https://t.me/s/https://t.me/s/alive
   - https://t.me/s/https://t.me/s/alixtso
@@ -12533,7 +12636,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/deu60
   - https://t.me/s/https://t.me/s/deu711
   - https://t.me/s/https://t.me/s/deu90
-  - https://t.me/s/https://t.me/s/deusup
   - https://t.me/s/https://t.me/s/developer
   - https://t.me/s/https://t.me/s/developers
   - https://t.me/s/https://t.me/s/deviceazad
@@ -12863,6 +12965,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/fairfaxcountyeda
   - https://t.me/s/https://t.me/s/fairyloot
   - https://t.me/s/https://t.me/s/faithful
+  - https://t.me/s/https://t.me/s/faland
   - https://t.me/s/https://t.me/s/falconpolv2rayng
   - https://t.me/s/https://t.me/s/falde
   - https://t.me/s/https://t.me/s/falkoraz
@@ -13372,11 +13475,14 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/gozarfreebot
   - https://t.me/s/https://t.me/s/gquuangc27
   - https://t.me/s/https://t.me/s/gr007
+  - https://t.me/s/https://t.me/s/gr021
   - https://t.me/s/https://t.me/s/gr022
   - https://t.me/s/https://t.me/s/gr050
+  - https://t.me/s/https://t.me/s/gr093
   - https://t.me/s/https://t.me/s/gr095
   - https://t.me/s/https://t.me/s/gr113
   - https://t.me/s/https://t.me/s/gr132
+  - https://t.me/s/https://t.me/s/gr148
   - https://t.me/s/https://t.me/s/gr149
   - https://t.me/s/https://t.me/s/gr155
   - https://t.me/s/https://t.me/s/gr157
@@ -13392,6 +13498,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/grdtgrreser
   - https://t.me/s/https://t.me/s/gre01
   - https://t.me/s/https://t.me/s/gre02
+  - https://t.me/s/https://t.me/s/great
   - https://t.me/s/https://t.me/s/greatebrit
   - https://t.me/s/https://t.me/s/greblox
   - https://t.me/s/https://t.me/s/greece
@@ -13441,6 +13548,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/h3artstone
   - https://t.me/s/https://t.me/s/hOPeFUL
   - https://t.me/s/https://t.me/s/hackers85
+  - https://t.me/s/https://t.me/s/hackney
   - https://t.me/s/https://t.me/s/hackuser
   - https://t.me/s/https://t.me/s/haditunnel
   - https://t.me/s/https://t.me/s/hafnetwork
@@ -14552,6 +14660,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/miller
   - https://t.me/s/https://t.me/s/miltering
   - https://t.me/s/https://t.me/s/miniproxy
+  - https://t.me/s/https://t.me/s/mionetwork1
   - https://t.me/s/https://t.me/s/mirror
   - https://t.me/s/https://t.me/s/mirror12
   - https://t.me/s/https://t.me/s/mistake
@@ -14761,7 +14870,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/ne2sr
   - https://t.me/s/https://t.me/s/neaaa
   - https://t.me/s/https://t.me/s/nearby
-  - https://t.me/s/https://t.me/s/nebulavpnx
   - https://t.me/s/https://t.me/s/nebulaze
   - https://t.me/s/https://t.me/s/nebulonix
   - https://t.me/s/https://t.me/s/nebulvpn
@@ -15508,6 +15616,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/r3mrcg001286ek2
   - https://t.me/s/https://t.me/s/r3mrcg001287h3p
   - https://t.me/s/https://t.me/s/r3mrcg00129437x
+  - https://t.me/s/https://t.me/s/r3mrcg007117fb8
   - https://t.me/s/https://t.me/s/r63bpfarjh1
   - https://t.me/s/https://t.me/s/rably
   - https://t.me/s/https://t.me/s/rack4
@@ -15516,7 +15625,6 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/rahbar
   - https://t.me/s/https://t.me/s/raigan
   - https://t.me/s/https://t.me/s/railway
-  - https://t.me/s/https://t.me/s/raiv2mmr
   - https://t.me/s/https://t.me/s/raman
   - https://t.me/s/https://t.me/s/ramfa
   - https://t.me/s/https://t.me/s/ramfaseo
@@ -16513,6 +16621,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/sun49
   - https://t.me/s/https://t.me/s/sunder
   - https://t.me/s/https://t.me/s/sunfield
+  - https://t.me/s/https://t.me/s/sunflowerplato
   - https://t.me/s/https://t.me/s/sunnaquran05
   - https://t.me/s/https://t.me/s/sunup
   - https://t.me/s/https://t.me/s/suolar
@@ -16985,6 +17094,7 @@ Removed IDs:
   - https://t.me/s/https://t.me/s/usstore
   - https://t.me/s/https://t.me/s/ustcx
   - https://t.me/s/https://t.me/s/uswx4
+  - https://t.me/s/https://t.me/s/utera
   - https://t.me/s/https://t.me/s/utube
   - https://t.me/s/https://t.me/s/uubest
   - https://t.me/s/https://t.me/s/uugt5
